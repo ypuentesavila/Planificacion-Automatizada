@@ -171,9 +171,18 @@ def is_applicable(state: State, action: Action) -> bool:
 
     Tip: frozenset supports the .issubset() method and the .isdisjoint() method.
     """
-    ### Your code here ###
-    return False
-    ### End of your code ###
+    #Version refactorizada
+    return action.precond_pos.issubset(state) and action.precond_neg.isdisjoint(state)
+
+    # #Version inicial
+    # for fluent in action.precond_pos:
+    #     if fluent not in state:
+    #         return False
+    # for fluent in action.precond_neg:
+    #     if fluent in state:
+    #         return False
+    # return True
+
 
 
 def apply_action(state: State, action: Action) -> State:
@@ -185,9 +194,12 @@ def apply_action(state: State, action: Action) -> State:
     Tip: frozenset supports set arithmetic: `|` (union) and `-` (difference).
     The order matters: first remove del_list, then add add_list.
     """
-    ### Your code here ###
-    return frozenset({})
-    ### End of your code ###
+    return (state - action.del_list) | action.add_list
+
+    # Version inicial
+    # new_state = state - action.del_list
+    # new_state = new_state | action.add_list
+    # return frozenset(new_state)  # ← retorna frozenset
 
 
 def get_all_groundings(domain: list[ActionSchema], objects: Objects) -> list[Action]:
@@ -240,6 +252,16 @@ def get_applicable_actions(
          Then call action_schema.ground(binding) and is_applicable(state, grounded).
          Or use get_all_groundings() and filter the results by applicability.
     """
-    ### Your code here ###
-    return []
-    ### End of your code ###
+    return [a for a in get_all_groundings(domain, objects) if is_applicable(state, a)]
+
+    # Version inicial 
+    # result = []  # ← lista vacía como en el esqueleto
+    # for action in get_all_groundings(domain, objects):
+    #     if is_applicable(state, action):
+    #         result.append(action)
+
+
+#Prompt usado para refactorizar funciones
+# Refactoriza este código Python para que sea más compacto y limpio, usando los métodos 
+# y operaciones nativas del lenguaje. 
+# Mantén exactamente la misma lógica y tipos de retorno.
