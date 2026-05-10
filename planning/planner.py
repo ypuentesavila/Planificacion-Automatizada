@@ -137,9 +137,41 @@ def forwardBFS(problem: Problem) -> list[Action]:
          to get (next_state, action, cost) triples. Track visited states to
          avoid revisiting the same state twice (graph search, not tree search).
     """
-    ### Your code here ###
+    #Version refactorizada
+    #Prompt empleado: refactoriza este codigo para que sea más compacto y limpio. usa unpacking donde sea posible, y 
+    #reemplaza loops simples por expresiones equivalentes.Mantén exactamente la misma lógica y tipos de retorno.
+    frontier = Queue()
+    frontier.push((problem.getStartState(), []))
+    visited = {problem.getStartState()}
+    while not frontier.isEmpty():
+        state, actions = frontier.pop()
+        if problem.isGoalState(state):
+            return actions
+        for next_state, action, _ in problem.getSuccessors(state):
+            if next_state not in visited:
+                visited.add(next_state)
+                frontier.push((next_state, actions + [action]))
+    
+    return []
 
-    ### End of your code ###
+    # Version inicial
+    # start = problem.getStartState()
+    # frontier = Queue()
+    # frontier.push((start, []))
+    # visited = set()
+    # visited.add(start)
+    # while not frontier.isEmpty():
+    #     state, actions = frontier.pop()
+        
+    #     if problem.isGoalState(state):
+    #         return actions
+        
+    #     for next_state, action, cost in problem.getSuccessors(state):
+    #         if next_state not in visited:
+    #             visited.add(next_state)
+    #             frontier.push((next_state, actions + [action]))
+    
+    # return []
 
 
 # ---------------------------------------------------------------------------
@@ -163,9 +195,20 @@ def regress(goal_set: State, action: Action) -> State | None:
     Tip: Use frozenset operations: intersection (&), difference (-), union (|).
          Check relevance first, then check for contradictions, then compute.
     """
-    ### Your code here ###
+    #Version iterada con ayuda de la ia
+    if not action.add_list & goal_set:
+        return None
+    if action.del_list & goal_set:
+        return None
+    return (goal_set - action.add_list) | action.precond_pos
 
-    ### End of your code ###
+    #Version inicial
+    # if len(action.add_list & goal_set) == 0:
+    #     return None
+    # if len(action.del_list & goal_set) != 0:
+    #     return None
+    # new_goal = (goal_set - action.add_list) | action.precond_pos
+    # return new_goal
 
 
 def backwardSearch(problem: Problem) -> list[Action]:
@@ -186,9 +229,47 @@ def backwardSearch(problem: Problem) -> list[Action]:
          Skip subgoals that contain static predicates (MedicalPost, Adjacent,
          Pickable) that are false in the initial state — these are dead ends.
     """
-    ### Your code here ###
+    #Version iterada con ayuda de la ia
+    #Prompt usado: ¿Puedes simplificarlo para que quede más limpio y corto sin cambiar lo que hace?
+    frontier = Queue()
+    frontier.push((problem.goal, []))
+    visited = {problem.goal}
+    
+    while not frontier.isEmpty():
+        goal, actions = frontier.pop()
+        if goal.issubset(problem.initial_state):
+            return actions
+        for action in get_all_groundings(problem.domain, problem.objects):
+            new_goal = regress(goal, action)
+            if new_goal is not None and new_goal not in visited:
+                visited.add(new_goal)
+                frontier.push((new_goal, [action] + actions))
+    
+    return []
 
-    ### End of your code ###
+    #Version inicial
+    # start_goal = problem.goal
+    # frontier = Queue()
+    # frontier.push((start_goal, []))
+    # visited = set()
+    # visited.add(start_goal)
+    
+    # while not frontier.isEmpty():
+    #     goal, actions = frontier.pop()
+        
+    #     if goal.issubset(problem.initial_state):
+    #         return actions
+        
+    #     for action in get_all_groundings(problem.domain, problem.objects):
+    #         new_goal = regress(goal, action)
+    #         if new_goal is None:
+    #             continue
+    #         if new_goal in visited:
+    #             continue
+    #         visited.add(new_goal)
+    #         frontier.push((new_goal, [action] + actions))
+    
+    # return []
 
 
 # ---------------------------------------------------------------------------
