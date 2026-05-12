@@ -25,9 +25,11 @@ class SimpleRescueProblem(Problem):
         initial_state, objects = build_initial_state(layout)
 
         ### Your code here ###
-        # Define the goal: patient_0 must be rescued.
-        # Tip: The goal is a frozenset of fluents that must all be True in the goal state.
-        goal = frozenset({})
+        # Version final: el primer paciente debe quedar rescatado.
+        goal = frozenset({("Rescued", "patient_0")})
+
+        # Version inicial
+        # goal = frozenset({})
         ### End of your code ###
 
         super().__init__(initial_state, goal, DOMAIN, objects)
@@ -50,9 +52,11 @@ class MultiRescueProblem(Problem):
         initial_state, objects = build_initial_state(layout)
 
         ### Your code here ###
-        # Define the goal: every patient must be rescued.
-        # Tip: Use a set comprehension over objects["patients"].
-        goal = frozenset({})
+        # Version final: todos los pacientes del layout deben quedar rescatados.
+        goal = frozenset(("Rescued", p) for p in objects["patients"])
+
+        # Version inicial
+        # goal = frozenset({})
         ### End of your code ###
 
         super().__init__(initial_state, goal, DOMAIN, objects)

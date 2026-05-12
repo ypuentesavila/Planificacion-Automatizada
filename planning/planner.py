@@ -296,9 +296,63 @@ def aStarPlanner(
          Use PriorityQueue with priority = g + h(next_state).
          Track the best g-cost seen for each state to avoid stale expansions.
     """
-    ### Your code here ###
+    # Version refactorizada con ayuda de la IA
+    # Prompt usado: "Refactoriza este A* para que use PriorityQueue de utils.py,
+    # cachee la heurística por estado, y descarte entradas obsoletas comparando
+    # g acumulada contra el mejor g visto. Mantén exactamente la misma lógica."
+    start = problem.getStartState()
+    h_start = heuristic(start, problem.goal, problem.domain, problem.objects)
 
-    ### End of your code ###
+    frontier = PriorityQueue()
+    frontier.push((start, []), h_start)
+
+    best_g: dict = {start: 0}
+    h_cache: dict = {start: h_start}
+
+    while not frontier.isEmpty():
+        state, actions = frontier.pop()
+        g = len(actions)
+
+        # Entrada obsoleta: ya encontramos un camino más corto a este estado.
+        if g > best_g.get(state, float("inf")):
+            continue
+
+        if problem.isGoalState(state):
+            return actions
+
+        for next_state, action, cost in problem.getSuccessors(state):
+            new_g = g + cost
+            if new_g < best_g.get(next_state, float("inf")):
+                best_g[next_state] = new_g
+                if next_state not in h_cache:
+                    h_cache[next_state] = heuristic(
+                        next_state, problem.goal, problem.domain, problem.objects
+                    )
+                f = new_g + h_cache[next_state]
+                frontier.push((next_state, actions + [action]), f)
+
+    return []
+
+    # Version inicial
+    # start = problem.getStartState()
+    # frontier = PriorityQueue()
+    # frontier.push((start, []), heuristic(start, problem.goal, problem.domain, problem.objects))
+    # best_g = {}
+    # best_g[start] = 0
+    # while not frontier.isEmpty():
+    #     state, actions = frontier.pop()
+    #     g = len(actions)
+    #     if g > best_g.get(state, 10**9):
+    #         continue
+    #     if problem.isGoalState(state):
+    #         return actions
+    #     for next_state, action, cost in problem.getSuccessors(state):
+    #         new_g = g + cost
+    #         if new_g < best_g.get(next_state, 10**9):
+    #             best_g[next_state] = new_g
+    #             h = heuristic(next_state, problem.goal, problem.domain, problem.objects)
+    #             frontier.push((next_state, actions + [action]), new_g + h)
+    # return []
 
 
 # Aliases used by the command-line argument parser
