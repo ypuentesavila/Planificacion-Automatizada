@@ -1,0 +1,15 @@
+RESUMEN PUNTO 5 - HTN
+Fecha: Tue May 12 20:10:47 -05 2026
+============================================================
+OK | PUNTO 5A - HTN - SimpleRescueProblem - tinyHTN | 1s
+OK | PUNTO 5A - HTN - SimpleRescueProblem - htnBase | 1s
+OK | PUNTO 5A EXTRA - HTN - SimpleRescueProblem - tinyBase | 0s
+OK | PUNTO 5A EXTRA - HTN - SimpleRescueProblem - smallRescue | 2s
+OK | PUNTO 5A EXTRA - HTN - SimpleRescueProblem - openRescue | 1s
+OK | PUNTO 5A EXTRA - HTN - SimpleRescueProblem - cornerRescue | 1s
+OK | PUNTO 5A EXTRA - HTN - SimpleRescueProblem - mediumRescue | 2s
+OK | PUNTO 5A EXTRA - HTN - SimpleRescueProblem - warehouseRescue | 2s
+OK | PUNTO 5B - HTN - MultiRescueProblem - tinyMulti | 1s
+OK | PUNTO 5B - HTN - MultiRescueProblem - smallMulti | 2s
+OK | PUNTO 5B - HTN - MultiRescueProblem - duoRescue | 1s
+OK | PUNTO 5B - HTN - MultiRescueProblem - crossMulti | 2s

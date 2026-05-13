@@ -198,9 +198,12 @@ def regress(goal_set: State, action: Action) -> State | None:
     #Version iterada con ayuda de la ia
     if not action.add_list & goal_set:
         return None
+
     if action.del_list & goal_set:
         return None
+
     return (goal_set - action.add_list) | action.precond_pos
+
 
     #Version inicial
     # if len(action.add_list & goal_set) == 0:
@@ -209,7 +212,13 @@ def regress(goal_set: State, action: Action) -> State | None:
     #     return None
     # new_goal = (goal_set - action.add_list) | action.precond_pos
     # return new_goal
+def has_false_static_goal(goal: State, initial_state: State) -> bool:
+    static_predicates = {"MedicalPost", "Adjacent", "Pickable"}
 
+    return any(
+        fluent[0] in static_predicates and fluent not in initial_state
+        for fluent in goal
+    )
 
 def backwardSearch(problem: Problem) -> list[Action]:
     """
@@ -233,18 +242,36 @@ def backwardSearch(problem: Problem) -> list[Action]:
     #Prompt usado: ¿Puedes simplificarlo para que quede más limpio y corto sin cambiar lo que hace?
     frontier = Queue()
     frontier.push((problem.goal, []))
+
     visited = {problem.goal}
-    
+    all_actions = get_all_groundings(problem.domain, problem.objects)
+
     while not frontier.isEmpty():
         goal, actions = frontier.pop()
+
         if goal.issubset(problem.initial_state):
             return actions
-        for action in get_all_groundings(problem.domain, problem.objects):
+
+        unsatisfied_goals = goal - problem.initial_state
+
+        for action in all_actions:
+            if not action.add_list & unsatisfied_goals:
+                continue
+
             new_goal = regress(goal, action)
-            if new_goal is not None and new_goal not in visited:
-                visited.add(new_goal)
-                frontier.push((new_goal, [action] + actions))
-    
+
+            if new_goal is None:
+                continue
+
+            if new_goal in visited:
+                continue
+
+            if has_false_static_goal(new_goal, problem.initial_state):
+                continue
+
+            visited.add(new_goal)
+            frontier.push((new_goal, [action] + actions))
+
     return []
 
     #Version inicial

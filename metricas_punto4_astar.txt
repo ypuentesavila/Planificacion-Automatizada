@@ -1,0 +1,36 @@
+RESUMEN PUNTO 4
+Fecha: Tue May 12 19:33:36 -05 2026
+============================================================
+OK | CONTROL - tinyBaseSearch - tinyBase | 1s
+OK | PUNTO 4 CONTROL - forwardBFS - Layout simple/tinyBase | 0s
+OK | PUNTO 4 CONTROL - forwardBFS - Layout simple/smallRescue | 2s
+OK | PUNTO 4 CONTROL - forwardBFS - Layout simple/openRescue | 10s
+OK | PUNTO 4 CONTROL - forwardBFS - Layout simple/cornerRescue | 2s
+ERROR | PUNTO 4 CONTROL - forwardBFS - Layout simple/narrowRescue | 0s
+OK | PUNTO 4 CONTROL - forwardBFS - Layout simple/mediumRescue | 6s
+OK | PUNTO 4 CONTROL - forwardBFS - Layout simple/warehouseRescue | 16s
+OK | PUNTO 4 - A* - Layout simple/tinyBase - Heurística nullHeuristic | 0s
+OK | PUNTO 4 - A* - Layout simple/tinyBase - Heurística ignorePreconditionsHeuristic | 1s
+OK | PUNTO 4 - A* - Layout simple/tinyBase - Heurística ignoreDeleteListsHeuristic | 1s
+OK | PUNTO 4 - A* - Layout simple/smallRescue - Heurística nullHeuristic | 1s
+OK | PUNTO 4 - A* - Layout simple/smallRescue - Heurística ignorePreconditionsHeuristic | 2s
+OK | PUNTO 4 - A* - Layout simple/smallRescue - Heurística ignoreDeleteListsHeuristic | 12s
+OK | PUNTO 4 - A* - Layout simple/openRescue - Heurística nullHeuristic | 11s
+OK | PUNTO 4 - A* - Layout simple/openRescue - Heurística ignorePreconditionsHeuristic | 16s
+OK | PUNTO 4 - A* - Layout simple/openRescue - Heurística ignoreDeleteListsHeuristic | 24s
+OK | PUNTO 4 - A* - Layout simple/cornerRescue - Heurística nullHeuristic | 1s
+OK | PUNTO 4 - A* - Layout simple/cornerRescue - Heurística ignorePreconditionsHeuristic | 2s
+OK | PUNTO 4 - A* - Layout simple/cornerRescue - Heurística ignoreDeleteListsHeuristic | 3s
+ERROR | PUNTO 4 - A* - Layout simple/narrowRescue - Heurística nullHeuristic | 0s
+ERROR | PUNTO 4 - A* - Layout simple/narrowRescue - Heurística ignorePreconditionsHeuristic | 0s
+ERROR | PUNTO 4 - A* - Layout simple/narrowRescue - Heurística ignoreDeleteListsHeuristic | 0s
+OK | PUNTO 4 - A* - Layout simple/mediumRescue - Heurística nullHeuristic | 6s
+OK | PUNTO 4 - A* - Layout simple/mediumRescue - Heurística ignorePreconditionsHeuristic | 10s
+OK | PUNTO 4 - A* - Layout simple/mediumRescue - Heurística ignoreDeleteListsHeuristic | 30s
+OK | PUNTO 4 - A* - Layout simple/warehouseRescue - Heurística nullHeuristic | 18s
+OK | PUNTO 4 - A* - Layout simple/warehouseRescue - Heurística ignorePreconditionsHeuristic | 31s
+OK | PUNTO 4 - A* - Layout simple/warehouseRescue - Heurística ignoreDeleteListsHeuristic | 83s
+OK | PUNTO 4 EXTRA - A* MultiRescue - Layout multi/tinyMulti - Heurística nullHeuristic | 24s
+OK | PUNTO 4 EXTRA - A* MultiRescue - Layout multi/tinyMulti - Heurística ignorePreconditionsHeuristic | 43s
+OK | PUNTO 4 EXTRA - A* MultiRescue - Layout multi/tinyMulti - Heurística ignoreDeleteListsHeuristic | 12s
+ERROR | PUNTO 4 EXTRA - A* MultiRescue - Layout multi/smallMulti - Heurística nullHeuristic | 1825s

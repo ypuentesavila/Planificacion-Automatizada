@@ -1,0 +1,4479 @@
+============================================================
+PUNTO 4 - A* Y HEURISTICAS
+Fecha: Tue May 12 19:33:36 -05 2026
+Carpeta: /Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada
+============================================================
+
+==================== CONTROL BASE ====================
+
+============================================================
+CONTROL - tinyBaseSearch - tinyBase
+Comando: python3 main.py -p SimpleRescueProblem -f tinyBaseSearch -l tinyBase -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyBase  (5×7)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(1, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (1, 3))]
+  Planificador: tinyBaseSearch
+
+  Tiempo de planificación: 0.000s
+  Estados expandidos: 0
+  Longitud del plan: 9 acciones
+
+  Plan:
+     1. Move(robot,(1,4),(1,3))
+     2. PickUp(robot,supplies_0,(1,3))
+     3. Move(robot,(1,3),(1,2))
+     4. SetupSupplies(robot,supplies_0,(1,2))
+     5. Move(robot,(1,2),(1,1))
+     6. PickUp(robot,patient_0,(1,1))
+     7. Move(robot,(1,1),(1,2))
+     8. PutDown(robot,patient_0,(1,2))
+     9. Rescue(robot,patient_0,(1,2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot,(1,4),(1,3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: PickUp(robot,supplies_0,(1,3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot,(1,3),(1,2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot,supplies_0,(1,2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot,(1,2),(1,1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 1))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot,patient_0,(1,1))
+  Posiciones: [('At', 'robot', (1, 1))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot,(1,1),(1,2))
+  Posiciones: [('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot,patient_0,(1,2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot,patient_0,(1,2))
+  Posiciones: [('At', 'robot', (1, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 1s
+
+==================== FORWARD BFS SIN HEURISTICA ====================
+
+============================================================
+PUNTO 4 CONTROL - forwardBFS - Layout simple/tinyBase
+Comando: python3 main.py -p SimpleRescueProblem -f forwardBFS -l tinyBase -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyBase  (5×7)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(1, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (1, 3))]
+  Planificador: forwardBFS
+
+  Tiempo de planificación: 0.014s
+  Estados expandidos: 375
+  Longitud del plan: 9 acciones
+
+  Plan:
+     1. Move(robot, (1, 4), (1, 3))
+     2. PickUp(robot, supplies_0, (1, 3))
+     3. Move(robot, (1, 3), (1, 2))
+     4. SetupSupplies(robot, supplies_0, (1, 2))
+     5. Move(robot, (1, 2), (1, 1))
+     6. PickUp(robot, patient_0, (1, 1))
+     7. Move(robot, (1, 1), (1, 2))
+     8. PutDown(robot, patient_0, (1, 2))
+     9. Rescue(robot, patient_0, (1, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (1, 1))
+  Posiciones: [('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 0s
+
+============================================================
+PUNTO 4 CONTROL - forwardBFS - Layout simple/smallRescue
+Comando: python3 main.py -p SimpleRescueProblem -f forwardBFS -l smallRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   smallRescue  (10×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(5, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (5, 6))]
+  Planificador: forwardBFS
+
+  Tiempo de planificación: 0.320s
+  Estados expandidos: 1446
+  Longitud del plan: 23 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (2, 8))
+     2. Move(robot, (2, 8), (3, 8))
+     3. Move(robot, (3, 8), (4, 8))
+     4. Move(robot, (4, 8), (5, 8))
+     5. Move(robot, (5, 8), (6, 8))
+     6. Move(robot, (6, 8), (6, 7))
+     7. Move(robot, (6, 7), (6, 6))
+     8. Move(robot, (6, 6), (5, 6))
+     9. PickUp(robot, supplies_0, (5, 6))
+    10. Move(robot, (5, 6), (6, 6))
+    11. Move(robot, (6, 6), (6, 5))
+    12. Move(robot, (6, 5), (6, 4))
+    13. Move(robot, (6, 4), (7, 4))
+    14. Move(robot, (7, 4), (7, 3))
+    15. Move(robot, (7, 3), (7, 2))
+    16. Move(robot, (7, 2), (6, 2))
+    17. Move(robot, (6, 2), (5, 2))
+    18. SetupSupplies(robot, supplies_0, (5, 2))
+    19. Move(robot, (5, 2), (5, 1))
+    20. PickUp(robot, patient_0, (5, 1))
+    21. Move(robot, (5, 1), (5, 2))
+    22. PutDown(robot, patient_0, (5, 2))
+    23. Rescue(robot, patient_0, (5, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (2, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (2, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (3, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (3, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (4, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (4, 8), (5, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (5, 8), (6, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 8), (6, 7))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 7)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 7), (6, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 6), (5, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: PickUp(robot, supplies_0, (5, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 6), (6, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 6), (6, 5))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 5), (6, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 4), (7, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 4), (7, 3))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 3), (7, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 2), (6, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 2), (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Move(robot, (5, 2), (5, 1))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 1)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (5, 1))
+  Posiciones: [('At', 'robot', (5, 1)), ('At', 'supplies_0', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Move(robot, (5, 1), (5, 2))
+  Posiciones: [('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (5, 2))
+  Posiciones: [('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 2s
+
+============================================================
+PUNTO 4 CONTROL - forwardBFS - Layout simple/openRescue
+Comando: python3 main.py -p SimpleRescueProblem -f forwardBFS -l openRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   openRescue  (12×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (9, 5))]
+  Planificador: forwardBFS
+
+  Tiempo de planificación: 8.853s
+  Estados expandidos: 13031
+  Longitud del plan: 26 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (1, 7))
+     2. Move(robot, (1, 7), (1, 6))
+     3. Move(robot, (1, 6), (1, 5))
+     4. Move(robot, (1, 5), (2, 5))
+     5. Move(robot, (2, 5), (3, 5))
+     6. Move(robot, (3, 5), (4, 5))
+     7. Move(robot, (4, 5), (5, 5))
+     8. Move(robot, (5, 5), (6, 5))
+     9. Move(robot, (6, 5), (7, 5))
+    10. Move(robot, (7, 5), (8, 5))
+    11. Move(robot, (8, 5), (9, 5))
+    12. PickUp(robot, supplies_0, (9, 5))
+    13. Move(robot, (9, 5), (8, 5))
+    14. Move(robot, (8, 5), (7, 5))
+    15. Move(robot, (7, 5), (6, 5))
+    16. Move(robot, (6, 5), (5, 5))
+    17. Move(robot, (5, 5), (4, 5))
+    18. Move(robot, (4, 5), (4, 4))
+    19. Move(robot, (4, 4), (4, 3))
+    20. Move(robot, (4, 3), (4, 2))
+    21. SetupSupplies(robot, supplies_0, (4, 2))
+    22. Move(robot, (4, 2), (4, 1))
+    23. PickUp(robot, patient_0, (4, 1))
+    24. Move(robot, (4, 1), (4, 2))
+    25. PutDown(robot, patient_0, (4, 2))
+    26. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 5), (2, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (2, 5), (3, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (3, 5), (4, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (4, 5), (5, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (5, 5), (6, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (6, 5), (7, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (7, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (7, 5), (8, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (8, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (8, 5), (9, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (9, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: PickUp(robot, supplies_0, (9, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (9, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (9, 5), (8, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (8, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (8, 5), (7, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (7, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 5), (6, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 5), (5, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 5), (4, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 5), (4, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 4), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 3), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 10s
+
+============================================================
+PUNTO 4 CONTROL - forwardBFS - Layout simple/cornerRescue
+Comando: python3 main.py -p SimpleRescueProblem -f forwardBFS -l cornerRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   cornerRescue  (8×9)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (6, 3))]
+  Planificador: forwardBFS
+
+  Tiempo de planificación: 0.441s
+  Estados expandidos: 2296
+  Longitud del plan: 19 acciones
+
+  Plan:
+     1. Move(robot, (1, 7), (1, 6))
+     2. Move(robot, (1, 6), (1, 5))
+     3. Move(robot, (1, 5), (1, 4))
+     4. Move(robot, (1, 4), (1, 3))
+     5. Move(robot, (1, 3), (2, 3))
+     6. Move(robot, (2, 3), (3, 3))
+     7. Move(robot, (3, 3), (4, 3))
+     8. Move(robot, (4, 3), (5, 3))
+     9. Move(robot, (5, 3), (6, 3))
+    10. PickUp(robot, supplies_0, (6, 3))
+    11. Move(robot, (6, 3), (5, 3))
+    12. Move(robot, (5, 3), (4, 3))
+    13. Move(robot, (4, 3), (4, 2))
+    14. SetupSupplies(robot, supplies_0, (4, 2))
+    15. Move(robot, (4, 2), (4, 1))
+    16. PickUp(robot, patient_0, (4, 1))
+    17. Move(robot, (4, 1), (4, 2))
+    18. PutDown(robot, patient_0, (4, 2))
+    19. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 3), (2, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (2, 3), (3, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (3, 3), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (4, 3), (5, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (5, 3), (6, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (6, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 3), (5, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 3), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 3), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 2s
+
+============================================================
+PUNTO 4 CONTROL - forwardBFS - Layout simple/narrowRescue
+Comando: python3 main.py -p SimpleRescueProblem -f forwardBFS -l narrowRescue -t
+============================================================
+Traceback (most recent call last):
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/main.py", line 243, in <module>
+    run(options)
+    ~~~^^^^^^^^^
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/main.py", line 148, in run
+    layout = rescue_layout.get_layout(options.layout)
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 83, in get_layout
+    return _try_load(os.path.join(root, filename))
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 91, in _try_load
+    return RescueLayout([line.rstrip("\n") for line in f])
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 30, in __init__
+    self._process(layout_text)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 36, in _process
+    char = layout_text[max_y - y][x]
+           ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: string index out of range
+
+Estado del comando: 1
+Duración aproximada: 0s
+
+============================================================
+PUNTO 4 CONTROL - forwardBFS - Layout simple/mediumRescue
+Comando: python3 main.py -p SimpleRescueProblem -f forwardBFS -l mediumRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   mediumRescue  (12×12)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 10)), ('At', 'supplies_0', (4, 6))]
+  Planificador: forwardBFS
+
+  Tiempo de planificación: 3.932s
+  Estados expandidos: 6184
+  Longitud del plan: 32 acciones
+
+  Plan:
+     1. Move(robot, (1, 10), (1, 9))
+     2. Move(robot, (1, 9), (1, 8))
+     3. Move(robot, (1, 8), (2, 8))
+     4. Move(robot, (2, 8), (3, 8))
+     5. Move(robot, (3, 8), (4, 8))
+     6. Move(robot, (4, 8), (5, 8))
+     7. Move(robot, (5, 8), (5, 7))
+     8. Move(robot, (5, 7), (5, 6))
+     9. Move(robot, (5, 6), (4, 6))
+    10. PickUp(robot, supplies_0, (4, 6))
+    11. Move(robot, (4, 6), (5, 6))
+    12. Move(robot, (5, 6), (5, 7))
+    13. Move(robot, (5, 7), (5, 8))
+    14. Move(robot, (5, 8), (4, 8))
+    15. Move(robot, (4, 8), (3, 8))
+    16. Move(robot, (3, 8), (2, 8))
+    17. Move(robot, (2, 8), (1, 8))
+    18. Move(robot, (1, 8), (1, 7))
+    19. Move(robot, (1, 7), (1, 6))
+    20. Move(robot, (1, 6), (1, 5))
+    21. Move(robot, (1, 5), (1, 4))
+    22. Move(robot, (1, 4), (1, 3))
+    23. Move(robot, (1, 3), (1, 2))
+    24. Move(robot, (1, 2), (2, 2))
+    25. Move(robot, (2, 2), (3, 2))
+    26. Move(robot, (3, 2), (4, 2))
+    27. SetupSupplies(robot, supplies_0, (4, 2))
+    28. Move(robot, (4, 2), (4, 1))
+    29. PickUp(robot, patient_0, (4, 1))
+    30. Move(robot, (4, 1), (4, 2))
+    31. PutDown(robot, patient_0, (4, 2))
+    32. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 10), (1, 9))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 9)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 9), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (2, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (3, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (4, 8), (5, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 8), (5, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 7)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 7), (5, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 6), (4, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: PickUp(robot, supplies_0, (4, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 6), (5, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 6), (5, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 7), (5, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (2, 8), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 2), (2, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (2, 2), (3, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 2), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 6s
+
+============================================================
+PUNTO 4 CONTROL - forwardBFS - Layout simple/warehouseRescue
+Comando: python3 main.py -p SimpleRescueProblem -f forwardBFS -l warehouseRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   warehouseRescue  (15×12)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(3, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 10)), ('At', 'supplies_0', (7, 7))]
+  Planificador: forwardBFS
+
+  Tiempo de planificación: 14.553s
+  Estados expandidos: 11476
+  Longitud del plan: 31 acciones
+
+  Plan:
+     1. Move(robot, (1, 10), (2, 10))
+     2. Move(robot, (2, 10), (3, 10))
+     3. Move(robot, (3, 10), (4, 10))
+     4. Move(robot, (4, 10), (5, 10))
+     5. Move(robot, (5, 10), (6, 10))
+     6. Move(robot, (6, 10), (7, 10))
+     7. Move(robot, (7, 10), (7, 9))
+     8. Move(robot, (7, 9), (7, 8))
+     9. Move(robot, (7, 8), (7, 7))
+    10. PickUp(robot, supplies_0, (7, 7))
+    11. Move(robot, (7, 7), (7, 8))
+    12. Move(robot, (7, 8), (7, 9))
+    13. Move(robot, (7, 9), (7, 10))
+    14. Move(robot, (7, 10), (6, 10))
+    15. Move(robot, (6, 10), (5, 10))
+    16. Move(robot, (5, 10), (4, 10))
+    17. Move(robot, (4, 10), (3, 10))
+    18. Move(robot, (3, 10), (3, 9))
+    19. Move(robot, (3, 9), (3, 8))
+    20. Move(robot, (3, 8), (3, 7))
+    21. Move(robot, (3, 7), (3, 6))
+    22. Move(robot, (3, 6), (3, 5))
+    23. Move(robot, (3, 5), (3, 4))
+    24. Move(robot, (3, 4), (3, 3))
+    25. Move(robot, (3, 3), (3, 2))
+    26. SetupSupplies(robot, supplies_0, (3, 2))
+    27. Move(robot, (3, 2), (3, 1))
+    28. PickUp(robot, patient_0, (3, 1))
+    29. Move(robot, (3, 1), (3, 2))
+    30. PutDown(robot, patient_0, (3, 2))
+    31. Rescue(robot, patient_0, (3, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 10), (2, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (2, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (2, 10), (3, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 10), (4, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (4, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (4, 10), (5, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (5, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (5, 10), (6, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (6, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (6, 10), (7, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 10), (7, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 9)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 9), (7, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 8)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 8), (7, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 7)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: PickUp(robot, supplies_0, (7, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 7), (7, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 8), (7, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 9))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 9), (7, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 10), (6, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (6, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 10), (5, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (5, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 10), (4, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (4, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 10), (3, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 10), (3, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 9))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 9), (3, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 8), (3, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 7), (3, 6))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 6), (3, 5))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 5), (3, 4))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 4), (3, 3))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 3), (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Move(robot, (3, 2), (3, 1))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (3, 1))
+  Posiciones: [('At', 'robot', (3, 1)), ('At', 'supplies_0', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (3, 2))
+  Posiciones: [('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (3, 2))
+  Posiciones: [('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 16s
+
+==================== A* EN LAYOUTS SIMPLE ====================
+
+============================================================
+PUNTO 4 - A* - Layout simple/tinyBase - Heurística nullHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h nullHeuristic -l tinyBase -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyBase  (5×7)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(1, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (1, 3))]
+  Planificador: aStarPlanner
+  Heurística: nullHeuristic
+
+  Tiempo de planificación: 0.014s
+  Estados expandidos: 375
+  Longitud del plan: 9 acciones
+
+  Plan:
+     1. Move(robot, (1, 4), (1, 3))
+     2. PickUp(robot, supplies_0, (1, 3))
+     3. Move(robot, (1, 3), (1, 2))
+     4. SetupSupplies(robot, supplies_0, (1, 2))
+     5. Move(robot, (1, 2), (1, 1))
+     6. PickUp(robot, patient_0, (1, 1))
+     7. Move(robot, (1, 1), (1, 2))
+     8. PutDown(robot, patient_0, (1, 2))
+     9. Rescue(robot, patient_0, (1, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (1, 1))
+  Posiciones: [('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 0s
+
+============================================================
+PUNTO 4 - A* - Layout simple/tinyBase - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l tinyBase -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyBase  (5×7)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(1, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (1, 3))]
+  Planificador: aStarPlanner
+  Heurística: ignorePreconditionsHeuristic
+
+  Tiempo de planificación: 0.025s
+  Estados expandidos: 281
+  Longitud del plan: 9 acciones
+
+  Plan:
+     1. Move(robot, (1, 4), (1, 3))
+     2. PickUp(robot, supplies_0, (1, 3))
+     3. Move(robot, (1, 3), (1, 2))
+     4. SetupSupplies(robot, supplies_0, (1, 2))
+     5. Move(robot, (1, 2), (1, 1))
+     6. PickUp(robot, patient_0, (1, 1))
+     7. Move(robot, (1, 1), (1, 2))
+     8. PutDown(robot, patient_0, (1, 2))
+     9. Rescue(robot, patient_0, (1, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (1, 1))
+  Posiciones: [('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 1s
+
+============================================================
+PUNTO 4 - A* - Layout simple/tinyBase - Heurística ignoreDeleteListsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignoreDeleteListsHeuristic -l tinyBase -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyBase  (5×7)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(1, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (1, 3))]
+  Planificador: aStarPlanner
+  Heurística: ignoreDeleteListsHeuristic
+
+  Tiempo de planificación: 0.066s
+  Estados expandidos: 37
+  Longitud del plan: 11 acciones
+
+  Plan:
+     1. Move(robot, (1, 4), (1, 3))
+     2. Move(robot, (1, 3), (1, 2))
+     3. Move(robot, (1, 2), (1, 1))
+     4. PickUp(robot, patient_0, (1, 1))
+     5. Move(robot, (1, 1), (1, 2))
+     6. PutDown(robot, patient_0, (1, 2))
+     7. Move(robot, (1, 2), (1, 3))
+     8. PickUp(robot, supplies_0, (1, 3))
+     9. Move(robot, (1, 3), (1, 2))
+    10. SetupSupplies(robot, supplies_0, (1, 2))
+    11. Rescue(robot, patient_0, (1, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: PickUp(robot, patient_0, (1, 1))
+  Posiciones: [('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: PutDown(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 1s
+
+============================================================
+PUNTO 4 - A* - Layout simple/smallRescue - Heurística nullHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h nullHeuristic -l smallRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   smallRescue  (10×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(5, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (5, 6))]
+  Planificador: aStarPlanner
+  Heurística: nullHeuristic
+
+  Tiempo de planificación: 0.318s
+  Estados expandidos: 1446
+  Longitud del plan: 23 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (2, 8))
+     2. Move(robot, (2, 8), (3, 8))
+     3. Move(robot, (3, 8), (4, 8))
+     4. Move(robot, (4, 8), (5, 8))
+     5. Move(robot, (5, 8), (6, 8))
+     6. Move(robot, (6, 8), (6, 7))
+     7. Move(robot, (6, 7), (6, 6))
+     8. Move(robot, (6, 6), (5, 6))
+     9. PickUp(robot, supplies_0, (5, 6))
+    10. Move(robot, (5, 6), (6, 6))
+    11. Move(robot, (6, 6), (6, 5))
+    12. Move(robot, (6, 5), (6, 4))
+    13. Move(robot, (6, 4), (7, 4))
+    14. Move(robot, (7, 4), (7, 3))
+    15. Move(robot, (7, 3), (7, 2))
+    16. Move(robot, (7, 2), (6, 2))
+    17. Move(robot, (6, 2), (5, 2))
+    18. SetupSupplies(robot, supplies_0, (5, 2))
+    19. Move(robot, (5, 2), (5, 1))
+    20. PickUp(robot, patient_0, (5, 1))
+    21. Move(robot, (5, 1), (5, 2))
+    22. PutDown(robot, patient_0, (5, 2))
+    23. Rescue(robot, patient_0, (5, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (2, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (2, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (3, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (3, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (4, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (4, 8), (5, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (5, 8), (6, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 8), (6, 7))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 7)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 7), (6, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 6), (5, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: PickUp(robot, supplies_0, (5, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 6), (6, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 6), (6, 5))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 5), (6, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 4), (7, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 4), (7, 3))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 3), (7, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 2), (6, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 2), (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Move(robot, (5, 2), (5, 1))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 1)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (5, 1))
+  Posiciones: [('At', 'robot', (5, 1)), ('At', 'supplies_0', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Move(robot, (5, 1), (5, 2))
+  Posiciones: [('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (5, 2))
+  Posiciones: [('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 1s
+
+============================================================
+PUNTO 4 - A* - Layout simple/smallRescue - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l smallRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   smallRescue  (10×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(5, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (5, 6))]
+  Planificador: aStarPlanner
+  Heurística: ignorePreconditionsHeuristic
+
+  Tiempo de planificación: 0.607s
+  Estados expandidos: 1334
+  Longitud del plan: 23 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (2, 8))
+     2. Move(robot, (2, 8), (3, 8))
+     3. Move(robot, (3, 8), (4, 8))
+     4. Move(robot, (4, 8), (5, 8))
+     5. Move(robot, (5, 8), (6, 8))
+     6. Move(robot, (6, 8), (6, 7))
+     7. Move(robot, (6, 7), (6, 6))
+     8. Move(robot, (6, 6), (5, 6))
+     9. PickUp(robot, supplies_0, (5, 6))
+    10. Move(robot, (5, 6), (6, 6))
+    11. Move(robot, (6, 6), (6, 5))
+    12. Move(robot, (6, 5), (6, 4))
+    13. Move(robot, (6, 4), (7, 4))
+    14. Move(robot, (7, 4), (7, 3))
+    15. Move(robot, (7, 3), (7, 2))
+    16. Move(robot, (7, 2), (6, 2))
+    17. Move(robot, (6, 2), (5, 2))
+    18. SetupSupplies(robot, supplies_0, (5, 2))
+    19. Move(robot, (5, 2), (5, 1))
+    20. PickUp(robot, patient_0, (5, 1))
+    21. Move(robot, (5, 1), (5, 2))
+    22. PutDown(robot, patient_0, (5, 2))
+    23. Rescue(robot, patient_0, (5, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (2, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (2, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (3, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (3, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (4, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (4, 8), (5, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (5, 8), (6, 8))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 8)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 8), (6, 7))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 7)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 7), (6, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 6), (5, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: PickUp(robot, supplies_0, (5, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 6), (6, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 6), (6, 5))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 5), (6, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 4), (7, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 4), (7, 3))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 3), (7, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 2), (6, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 2), (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Move(robot, (5, 2), (5, 1))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 1)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (5, 1))
+  Posiciones: [('At', 'robot', (5, 1)), ('At', 'supplies_0', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Move(robot, (5, 1), (5, 2))
+  Posiciones: [('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (5, 2))
+  Posiciones: [('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 2s
+
+============================================================
+PUNTO 4 - A* - Layout simple/smallRescue - Heurística ignoreDeleteListsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignoreDeleteListsHeuristic -l smallRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   smallRescue  (10×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(5, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (5, 6))]
+  Planificador: aStarPlanner
+  Heurística: ignoreDeleteListsHeuristic
+
+  Tiempo de planificación: 9.799s
+  Estados expandidos: 291
+  Longitud del plan: 37 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (1, 7))
+     2. Move(robot, (1, 7), (1, 6))
+     3. Move(robot, (1, 6), (1, 5))
+     4. Move(robot, (1, 5), (1, 4))
+     5. Move(robot, (1, 4), (2, 4))
+     6. Move(robot, (2, 4), (3, 4))
+     7. Move(robot, (3, 4), (4, 4))
+     8. Move(robot, (4, 4), (5, 4))
+     9. Move(robot, (5, 4), (6, 4))
+    10. Move(robot, (6, 4), (7, 4))
+    11. Move(robot, (7, 4), (7, 3))
+    12. Move(robot, (7, 3), (7, 2))
+    13. Move(robot, (7, 2), (6, 2))
+    14. Move(robot, (6, 2), (5, 2))
+    15. Move(robot, (5, 2), (5, 1))
+    16. PickUp(robot, patient_0, (5, 1))
+    17. Move(robot, (5, 1), (5, 2))
+    18. PutDown(robot, patient_0, (5, 2))
+    19. Move(robot, (5, 2), (6, 2))
+    20. Move(robot, (6, 2), (7, 2))
+    21. Move(robot, (7, 2), (7, 3))
+    22. Move(robot, (7, 3), (7, 4))
+    23. Move(robot, (7, 4), (6, 4))
+    24. Move(robot, (6, 4), (6, 5))
+    25. Move(robot, (6, 5), (6, 6))
+    26. Move(robot, (6, 6), (5, 6))
+    27. PickUp(robot, supplies_0, (5, 6))
+    28. Move(robot, (5, 6), (6, 6))
+    29. Move(robot, (6, 6), (6, 5))
+    30. Move(robot, (6, 5), (6, 4))
+    31. Move(robot, (6, 4), (7, 4))
+    32. Move(robot, (7, 4), (7, 3))
+    33. Move(robot, (7, 3), (7, 2))
+    34. Move(robot, (7, 2), (6, 2))
+    35. Move(robot, (6, 2), (5, 2))
+    36. SetupSupplies(robot, supplies_0, (5, 2))
+    37. Rescue(robot, patient_0, (5, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (1, 4), (2, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (2, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (2, 4), (3, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (3, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (3, 4), (4, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (4, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (4, 4), (5, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (5, 4), (6, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 4), (7, 4))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (7, 4), (7, 3))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 3)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (7, 3), (7, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (7, 2)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (7, 2), (6, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (6, 2)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 2), (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (5, 2), (5, 1))
+  Posiciones: [('At', 'patient_0', (5, 1)), ('At', 'robot', (5, 1)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: PickUp(robot, patient_0, (5, 1))
+  Posiciones: [('At', 'robot', (5, 1)), ('At', 'supplies_0', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: Move(robot, (5, 1), (5, 2))
+  Posiciones: [('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: PutDown(robot, patient_0, (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (5, 2), (6, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (6, 2)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 2), (7, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (7, 2)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (7, 2), (7, 3))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (7, 3)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (7, 3), (7, 4))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (7, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (7, 4), (6, 4))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (6, 4)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 4), (6, 5))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (6, 5)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 5), (6, 6))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (6, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: Move(robot, (6, 6), (5, 6))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (5, 6)), ('At', 'supplies_0', (5, 6))]
+
+  Ejecutando: PickUp(robot, supplies_0, (5, 6))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 6), (6, 6))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (6, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 6), (6, 5))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (6, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 5), (6, 4))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (6, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 4), (7, 4))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (7, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 4), (7, 3))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (7, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 3), (7, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (7, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 2), (6, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (6, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 2), (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (5, 2))
+  Posiciones: [('At', 'patient_0', (5, 2)), ('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (5, 2))
+  Posiciones: [('At', 'robot', (5, 2)), ('At', 'supplies_0', (5, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (5, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 12s
+
+============================================================
+PUNTO 4 - A* - Layout simple/openRescue - Heurística nullHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h nullHeuristic -l openRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   openRescue  (12×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (9, 5))]
+  Planificador: aStarPlanner
+  Heurística: nullHeuristic
+
+  Tiempo de planificación: 9.123s
+  Estados expandidos: 13031
+  Longitud del plan: 26 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (1, 7))
+     2. Move(robot, (1, 7), (1, 6))
+     3. Move(robot, (1, 6), (1, 5))
+     4. Move(robot, (1, 5), (2, 5))
+     5. Move(robot, (2, 5), (3, 5))
+     6. Move(robot, (3, 5), (4, 5))
+     7. Move(robot, (4, 5), (5, 5))
+     8. Move(robot, (5, 5), (6, 5))
+     9. Move(robot, (6, 5), (7, 5))
+    10. Move(robot, (7, 5), (8, 5))
+    11. Move(robot, (8, 5), (9, 5))
+    12. PickUp(robot, supplies_0, (9, 5))
+    13. Move(robot, (9, 5), (8, 5))
+    14. Move(robot, (8, 5), (7, 5))
+    15. Move(robot, (7, 5), (6, 5))
+    16. Move(robot, (6, 5), (5, 5))
+    17. Move(robot, (5, 5), (4, 5))
+    18. Move(robot, (4, 5), (4, 4))
+    19. Move(robot, (4, 4), (4, 3))
+    20. Move(robot, (4, 3), (4, 2))
+    21. SetupSupplies(robot, supplies_0, (4, 2))
+    22. Move(robot, (4, 2), (4, 1))
+    23. PickUp(robot, patient_0, (4, 1))
+    24. Move(robot, (4, 1), (4, 2))
+    25. PutDown(robot, patient_0, (4, 2))
+    26. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 5), (2, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (2, 5), (3, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (3, 5), (4, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (4, 5), (5, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (5, 5), (6, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (6, 5), (7, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (7, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (7, 5), (8, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (8, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (8, 5), (9, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (9, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: PickUp(robot, supplies_0, (9, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (9, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (9, 5), (8, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (8, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (8, 5), (7, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (7, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 5), (6, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 5), (5, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 5), (4, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 5), (4, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 4), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 3), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 11s
+
+============================================================
+PUNTO 4 - A* - Layout simple/openRescue - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l openRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   openRescue  (12×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (9, 5))]
+  Planificador: aStarPlanner
+  Heurística: ignorePreconditionsHeuristic
+
+  Tiempo de planificación: 14.770s
+  Estados expandidos: 10024
+  Longitud del plan: 26 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (1, 7))
+     2. Move(robot, (1, 7), (1, 6))
+     3. Move(robot, (1, 6), (1, 5))
+     4. Move(robot, (1, 5), (2, 5))
+     5. Move(robot, (2, 5), (3, 5))
+     6. Move(robot, (3, 5), (4, 5))
+     7. Move(robot, (4, 5), (5, 5))
+     8. Move(robot, (5, 5), (6, 5))
+     9. Move(robot, (6, 5), (7, 5))
+    10. Move(robot, (7, 5), (8, 5))
+    11. Move(robot, (8, 5), (9, 5))
+    12. PickUp(robot, supplies_0, (9, 5))
+    13. Move(robot, (9, 5), (8, 5))
+    14. Move(robot, (8, 5), (7, 5))
+    15. Move(robot, (7, 5), (6, 5))
+    16. Move(robot, (6, 5), (5, 5))
+    17. Move(robot, (5, 5), (4, 5))
+    18. Move(robot, (4, 5), (4, 4))
+    19. Move(robot, (4, 4), (4, 3))
+    20. Move(robot, (4, 3), (4, 2))
+    21. SetupSupplies(robot, supplies_0, (4, 2))
+    22. Move(robot, (4, 2), (4, 1))
+    23. PickUp(robot, patient_0, (4, 1))
+    24. Move(robot, (4, 1), (4, 2))
+    25. PutDown(robot, patient_0, (4, 2))
+    26. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 5), (2, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (2, 5), (3, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (3, 5), (4, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (4, 5), (5, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (5, 5), (6, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (6, 5), (7, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (7, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (7, 5), (8, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (8, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (8, 5), (9, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (9, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: PickUp(robot, supplies_0, (9, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (9, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (9, 5), (8, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (8, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (8, 5), (7, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (7, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 5), (6, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 5), (5, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 5), (4, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 5), (4, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 4), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 3), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 16s
+
+============================================================
+PUNTO 4 - A* - Layout simple/openRescue - Heurística ignoreDeleteListsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignoreDeleteListsHeuristic -l openRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   openRescue  (12×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (9, 5))]
+  Planificador: aStarPlanner
+  Heurística: ignoreDeleteListsHeuristic
+
+  Tiempo de planificación: 21.636s
+  Estados expandidos: 169
+  Longitud del plan: 32 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (1, 7))
+     2. Move(robot, (1, 7), (1, 6))
+     3. Move(robot, (1, 6), (1, 5))
+     4. Move(robot, (1, 5), (1, 4))
+     5. Move(robot, (1, 4), (1, 3))
+     6. Move(robot, (1, 3), (1, 2))
+     7. Move(robot, (1, 2), (1, 1))
+     8. Move(robot, (1, 1), (2, 1))
+     9. Move(robot, (2, 1), (3, 1))
+    10. Move(robot, (3, 1), (4, 1))
+    11. PickUp(robot, patient_0, (4, 1))
+    12. Move(robot, (4, 1), (4, 2))
+    13. PutDown(robot, patient_0, (4, 2))
+    14. Move(robot, (4, 2), (4, 3))
+    15. Move(robot, (4, 3), (4, 4))
+    16. Move(robot, (4, 4), (4, 5))
+    17. Move(robot, (4, 5), (5, 5))
+    18. Move(robot, (5, 5), (6, 5))
+    19. Move(robot, (6, 5), (7, 5))
+    20. Move(robot, (7, 5), (8, 5))
+    21. Move(robot, (8, 5), (9, 5))
+    22. PickUp(robot, supplies_0, (9, 5))
+    23. Move(robot, (9, 5), (9, 4))
+    24. Move(robot, (9, 4), (9, 3))
+    25. Move(robot, (9, 3), (9, 2))
+    26. Move(robot, (9, 2), (8, 2))
+    27. Move(robot, (8, 2), (7, 2))
+    28. Move(robot, (7, 2), (6, 2))
+    29. Move(robot, (6, 2), (5, 2))
+    30. Move(robot, (5, 2), (4, 2))
+    31. SetupSupplies(robot, supplies_0, (4, 2))
+    32. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (1, 1), (2, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 1)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (2, 1), (3, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (3, 1), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (9, 5))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (9, 5))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 3)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (4, 3), (4, 4))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 4)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (4, 4), (4, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (4, 5), (5, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (5, 5), (6, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (6, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (6, 5), (7, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (7, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (7, 5), (8, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (8, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: Move(robot, (8, 5), (9, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (9, 5)), ('At', 'supplies_0', (9, 5))]
+
+  Ejecutando: PickUp(robot, supplies_0, (9, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (9, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (9, 5), (9, 4))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (9, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (9, 4), (9, 3))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (9, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (9, 3), (9, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (9, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (9, 2), (8, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (8, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (8, 2), (7, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (7, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 2), (6, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (6, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 2), (5, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 2), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 24s
+
+============================================================
+PUNTO 4 - A* - Layout simple/cornerRescue - Heurística nullHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h nullHeuristic -l cornerRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   cornerRescue  (8×9)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (6, 3))]
+  Planificador: aStarPlanner
+  Heurística: nullHeuristic
+
+  Tiempo de planificación: 0.454s
+  Estados expandidos: 2296
+  Longitud del plan: 19 acciones
+
+  Plan:
+     1. Move(robot, (1, 7), (1, 6))
+     2. Move(robot, (1, 6), (1, 5))
+     3. Move(robot, (1, 5), (1, 4))
+     4. Move(robot, (1, 4), (1, 3))
+     5. Move(robot, (1, 3), (2, 3))
+     6. Move(robot, (2, 3), (3, 3))
+     7. Move(robot, (3, 3), (4, 3))
+     8. Move(robot, (4, 3), (5, 3))
+     9. Move(robot, (5, 3), (6, 3))
+    10. PickUp(robot, supplies_0, (6, 3))
+    11. Move(robot, (6, 3), (5, 3))
+    12. Move(robot, (5, 3), (4, 3))
+    13. Move(robot, (4, 3), (4, 2))
+    14. SetupSupplies(robot, supplies_0, (4, 2))
+    15. Move(robot, (4, 2), (4, 1))
+    16. PickUp(robot, patient_0, (4, 1))
+    17. Move(robot, (4, 1), (4, 2))
+    18. PutDown(robot, patient_0, (4, 2))
+    19. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 3), (2, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (2, 3), (3, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (3, 3), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (4, 3), (5, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (5, 3), (6, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (6, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 3), (5, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 3), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 3), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 1s
+
+============================================================
+PUNTO 4 - A* - Layout simple/cornerRescue - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l cornerRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   cornerRescue  (8×9)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (6, 3))]
+  Planificador: aStarPlanner
+  Heurística: ignorePreconditionsHeuristic
+
+  Tiempo de planificación: 0.772s
+  Estados expandidos: 1685
+  Longitud del plan: 19 acciones
+
+  Plan:
+     1. Move(robot, (1, 7), (1, 6))
+     2. Move(robot, (1, 6), (1, 5))
+     3. Move(robot, (1, 5), (1, 4))
+     4. Move(robot, (1, 4), (1, 3))
+     5. Move(robot, (1, 3), (2, 3))
+     6. Move(robot, (2, 3), (3, 3))
+     7. Move(robot, (3, 3), (4, 3))
+     8. Move(robot, (4, 3), (5, 3))
+     9. Move(robot, (5, 3), (6, 3))
+    10. PickUp(robot, supplies_0, (6, 3))
+    11. Move(robot, (6, 3), (5, 3))
+    12. Move(robot, (5, 3), (4, 3))
+    13. Move(robot, (4, 3), (4, 2))
+    14. SetupSupplies(robot, supplies_0, (4, 2))
+    15. Move(robot, (4, 2), (4, 1))
+    16. PickUp(robot, patient_0, (4, 1))
+    17. Move(robot, (4, 1), (4, 2))
+    18. PutDown(robot, patient_0, (4, 2))
+    19. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 3), (2, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (2, 3), (3, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (3, 3), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (4, 3), (5, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (5, 3), (6, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (6, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (6, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 3), (5, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 3), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 3), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 2s
+
+============================================================
+PUNTO 4 - A* - Layout simple/cornerRescue - Heurística ignoreDeleteListsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignoreDeleteListsHeuristic -l cornerRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   cornerRescue  (8×9)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (6, 3))]
+  Planificador: aStarPlanner
+  Heurística: ignoreDeleteListsHeuristic
+
+  Tiempo de planificación: 1.672s
+  Estados expandidos: 72
+  Longitud del plan: 21 acciones
+
+  Plan:
+     1. Move(robot, (1, 7), (1, 6))
+     2. Move(robot, (1, 6), (1, 5))
+     3. Move(robot, (1, 5), (1, 4))
+     4. Move(robot, (1, 4), (1, 3))
+     5. Move(robot, (1, 3), (1, 2))
+     6. Move(robot, (1, 2), (1, 1))
+     7. Move(robot, (1, 1), (2, 1))
+     8. Move(robot, (2, 1), (3, 1))
+     9. Move(robot, (3, 1), (4, 1))
+    10. PickUp(robot, patient_0, (4, 1))
+    11. Move(robot, (4, 1), (4, 2))
+    12. PutDown(robot, patient_0, (4, 2))
+    13. Move(robot, (4, 2), (4, 3))
+    14. Move(robot, (4, 3), (5, 3))
+    15. Move(robot, (5, 3), (6, 3))
+    16. PickUp(robot, supplies_0, (6, 3))
+    17. Move(robot, (6, 3), (6, 2))
+    18. Move(robot, (6, 2), (5, 2))
+    19. Move(robot, (5, 2), (4, 2))
+    20. SetupSupplies(robot, supplies_0, (4, 2))
+    21. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (1, 1), (2, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 1)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (2, 1), (3, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (3, 1), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (6, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (6, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 3))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (4, 3), (5, 3))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: Move(robot, (5, 3), (6, 3))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (6, 3)), ('At', 'supplies_0', (6, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (6, 3))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (6, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 3), (6, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (6, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 2), (5, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 2), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 3s
+
+============================================================
+PUNTO 4 - A* - Layout simple/narrowRescue - Heurística nullHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h nullHeuristic -l narrowRescue -t
+============================================================
+Traceback (most recent call last):
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/main.py", line 243, in <module>
+    run(options)
+    ~~~^^^^^^^^^
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/main.py", line 148, in run
+    layout = rescue_layout.get_layout(options.layout)
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 83, in get_layout
+    return _try_load(os.path.join(root, filename))
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 91, in _try_load
+    return RescueLayout([line.rstrip("\n") for line in f])
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 30, in __init__
+    self._process(layout_text)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 36, in _process
+    char = layout_text[max_y - y][x]
+           ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: string index out of range
+
+Estado del comando: 1
+Duración aproximada: 0s
+
+============================================================
+PUNTO 4 - A* - Layout simple/narrowRescue - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l narrowRescue -t
+============================================================
+Traceback (most recent call last):
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/main.py", line 243, in <module>
+    run(options)
+    ~~~^^^^^^^^^
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/main.py", line 148, in run
+    layout = rescue_layout.get_layout(options.layout)
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 83, in get_layout
+    return _try_load(os.path.join(root, filename))
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 91, in _try_load
+    return RescueLayout([line.rstrip("\n") for line in f])
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 30, in __init__
+    self._process(layout_text)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 36, in _process
+    char = layout_text[max_y - y][x]
+           ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: string index out of range
+
+Estado del comando: 1
+Duración aproximada: 0s
+
+============================================================
+PUNTO 4 - A* - Layout simple/narrowRescue - Heurística ignoreDeleteListsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignoreDeleteListsHeuristic -l narrowRescue -t
+============================================================
+Traceback (most recent call last):
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/main.py", line 243, in <module>
+    run(options)
+    ~~~^^^^^^^^^
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/main.py", line 148, in run
+    layout = rescue_layout.get_layout(options.layout)
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 83, in get_layout
+    return _try_load(os.path.join(root, filename))
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 91, in _try_load
+    return RescueLayout([line.rstrip("\n") for line in f])
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 30, in __init__
+    self._process(layout_text)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/ypuentes/Desktop/Planificacion-Automatizada/Planificacion-Automatizada/world/rescue_layout.py", line 36, in _process
+    char = layout_text[max_y - y][x]
+           ~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: string index out of range
+
+Estado del comando: 1
+Duración aproximada: 0s
+
+============================================================
+PUNTO 4 - A* - Layout simple/mediumRescue - Heurística nullHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h nullHeuristic -l mediumRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   mediumRescue  (12×12)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 10)), ('At', 'supplies_0', (4, 6))]
+  Planificador: aStarPlanner
+  Heurística: nullHeuristic
+
+  Tiempo de planificación: 4.135s
+  Estados expandidos: 6184
+  Longitud del plan: 32 acciones
+
+  Plan:
+     1. Move(robot, (1, 10), (1, 9))
+     2. Move(robot, (1, 9), (1, 8))
+     3. Move(robot, (1, 8), (2, 8))
+     4. Move(robot, (2, 8), (3, 8))
+     5. Move(robot, (3, 8), (4, 8))
+     6. Move(robot, (4, 8), (5, 8))
+     7. Move(robot, (5, 8), (5, 7))
+     8. Move(robot, (5, 7), (5, 6))
+     9. Move(robot, (5, 6), (4, 6))
+    10. PickUp(robot, supplies_0, (4, 6))
+    11. Move(robot, (4, 6), (5, 6))
+    12. Move(robot, (5, 6), (5, 7))
+    13. Move(robot, (5, 7), (5, 8))
+    14. Move(robot, (5, 8), (4, 8))
+    15. Move(robot, (4, 8), (3, 8))
+    16. Move(robot, (3, 8), (2, 8))
+    17. Move(robot, (2, 8), (1, 8))
+    18. Move(robot, (1, 8), (1, 7))
+    19. Move(robot, (1, 7), (1, 6))
+    20. Move(robot, (1, 6), (1, 5))
+    21. Move(robot, (1, 5), (1, 4))
+    22. Move(robot, (1, 4), (1, 3))
+    23. Move(robot, (1, 3), (1, 2))
+    24. Move(robot, (1, 2), (2, 2))
+    25. Move(robot, (2, 2), (3, 2))
+    26. Move(robot, (3, 2), (4, 2))
+    27. SetupSupplies(robot, supplies_0, (4, 2))
+    28. Move(robot, (4, 2), (4, 1))
+    29. PickUp(robot, patient_0, (4, 1))
+    30. Move(robot, (4, 1), (4, 2))
+    31. PutDown(robot, patient_0, (4, 2))
+    32. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 10), (1, 9))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 9)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 9), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (2, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (3, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (4, 8), (5, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 8), (5, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 7)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 7), (5, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 6), (4, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: PickUp(robot, supplies_0, (4, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 6), (5, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 6), (5, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 7), (5, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (2, 8), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 2), (2, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (2, 2), (3, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 2), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 6s
+
+============================================================
+PUNTO 4 - A* - Layout simple/mediumRescue - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l mediumRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   mediumRescue  (12×12)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 10)), ('At', 'supplies_0', (4, 6))]
+  Planificador: aStarPlanner
+  Heurística: ignorePreconditionsHeuristic
+
+  Tiempo de planificación: 7.471s
+  Estados expandidos: 5623
+  Longitud del plan: 32 acciones
+
+  Plan:
+     1. Move(robot, (1, 10), (1, 9))
+     2. Move(robot, (1, 9), (1, 8))
+     3. Move(robot, (1, 8), (2, 8))
+     4. Move(robot, (2, 8), (3, 8))
+     5. Move(robot, (3, 8), (4, 8))
+     6. Move(robot, (4, 8), (5, 8))
+     7. Move(robot, (5, 8), (5, 7))
+     8. Move(robot, (5, 7), (5, 6))
+     9. Move(robot, (5, 6), (4, 6))
+    10. PickUp(robot, supplies_0, (4, 6))
+    11. Move(robot, (4, 6), (5, 6))
+    12. Move(robot, (5, 6), (5, 7))
+    13. Move(robot, (5, 7), (5, 8))
+    14. Move(robot, (5, 8), (4, 8))
+    15. Move(robot, (4, 8), (3, 8))
+    16. Move(robot, (3, 8), (2, 8))
+    17. Move(robot, (2, 8), (1, 8))
+    18. Move(robot, (1, 8), (1, 7))
+    19. Move(robot, (1, 7), (1, 6))
+    20. Move(robot, (1, 6), (1, 5))
+    21. Move(robot, (1, 5), (1, 4))
+    22. Move(robot, (1, 4), (1, 3))
+    23. Move(robot, (1, 3), (1, 2))
+    24. Move(robot, (1, 2), (2, 2))
+    25. Move(robot, (2, 2), (3, 2))
+    26. Move(robot, (3, 2), (4, 2))
+    27. SetupSupplies(robot, supplies_0, (4, 2))
+    28. Move(robot, (4, 2), (4, 1))
+    29. PickUp(robot, patient_0, (4, 1))
+    30. Move(robot, (4, 1), (4, 2))
+    31. PutDown(robot, patient_0, (4, 2))
+    32. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 10), (1, 9))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 9)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 9), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (2, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (3, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (4, 8), (5, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 8), (5, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 7)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 7), (5, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 6), (4, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: PickUp(robot, supplies_0, (4, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 6), (5, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 6), (5, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 7), (5, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (5, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (2, 8), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 2), (2, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (2, 2), (3, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 2), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 2), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 10s
+
+============================================================
+PUNTO 4 - A* - Layout simple/mediumRescue - Heurística ignoreDeleteListsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignoreDeleteListsHeuristic -l mediumRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   mediumRescue  (12×12)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 10)), ('At', 'supplies_0', (4, 6))]
+  Planificador: aStarPlanner
+  Heurística: ignoreDeleteListsHeuristic
+
+  Tiempo de planificación: 27.978s
+  Estados expandidos: 208
+  Longitud del plan: 50 acciones
+
+  Plan:
+     1. Move(robot, (1, 10), (1, 9))
+     2. Move(robot, (1, 9), (1, 8))
+     3. Move(robot, (1, 8), (1, 7))
+     4. Move(robot, (1, 7), (1, 6))
+     5. Move(robot, (1, 6), (1, 5))
+     6. Move(robot, (1, 5), (1, 4))
+     7. Move(robot, (1, 4), (1, 3))
+     8. Move(robot, (1, 3), (1, 2))
+     9. Move(robot, (1, 2), (1, 1))
+    10. Move(robot, (1, 1), (2, 1))
+    11. Move(robot, (2, 1), (3, 1))
+    12. Move(robot, (3, 1), (4, 1))
+    13. PickUp(robot, patient_0, (4, 1))
+    14. Move(robot, (4, 1), (4, 2))
+    15. PutDown(robot, patient_0, (4, 2))
+    16. Move(robot, (4, 2), (3, 2))
+    17. Move(robot, (3, 2), (2, 2))
+    18. Move(robot, (2, 2), (1, 2))
+    19. Move(robot, (1, 2), (1, 3))
+    20. Move(robot, (1, 3), (1, 4))
+    21. Move(robot, (1, 4), (1, 5))
+    22. Move(robot, (1, 5), (1, 6))
+    23. Move(robot, (1, 6), (1, 7))
+    24. Move(robot, (1, 7), (1, 8))
+    25. Move(robot, (1, 8), (2, 8))
+    26. Move(robot, (2, 8), (3, 8))
+    27. Move(robot, (3, 8), (4, 8))
+    28. Move(robot, (4, 8), (5, 8))
+    29. Move(robot, (5, 8), (5, 7))
+    30. Move(robot, (5, 7), (5, 6))
+    31. Move(robot, (5, 6), (4, 6))
+    32. PickUp(robot, supplies_0, (4, 6))
+    33. Move(robot, (4, 6), (5, 6))
+    34. Move(robot, (5, 6), (5, 7))
+    35. Move(robot, (5, 7), (5, 8))
+    36. Move(robot, (5, 8), (4, 8))
+    37. Move(robot, (4, 8), (3, 8))
+    38. Move(robot, (3, 8), (2, 8))
+    39. Move(robot, (2, 8), (1, 8))
+    40. Move(robot, (1, 8), (1, 7))
+    41. Move(robot, (1, 7), (1, 6))
+    42. Move(robot, (1, 6), (1, 5))
+    43. Move(robot, (1, 5), (1, 4))
+    44. Move(robot, (1, 4), (1, 3))
+    45. Move(robot, (1, 3), (1, 2))
+    46. Move(robot, (1, 2), (2, 2))
+    47. Move(robot, (2, 2), (3, 2))
+    48. Move(robot, (3, 2), (4, 2))
+    49. SetupSupplies(robot, supplies_0, (4, 2))
+    50. Rescue(robot, patient_0, (4, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 10), (1, 9))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 9)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 9), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 1), (2, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (2, 1)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (2, 1), (3, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (3, 1), (4, 1))
+  Posiciones: [('At', 'patient_0', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: PickUp(robot, patient_0, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (4, 6))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: Move(robot, (4, 1), (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 6))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: PutDown(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (4, 2), (3, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (3, 2), (2, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (2, 2)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (2, 2), (1, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 3), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 7), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (1, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (2, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (2, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (3, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (3, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (4, 8), (5, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 8)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 8), (5, 7))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 7)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 7), (5, 6))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: Move(robot, (5, 6), (4, 6))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 6)), ('At', 'supplies_0', (4, 6))]
+
+  Ejecutando: PickUp(robot, supplies_0, (4, 6))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 6), (5, 6))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 6), (5, 7))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 7), (5, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (5, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 8), (4, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 8), (3, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (3, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 8), (2, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (2, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (2, 8), (1, 8))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (1, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 2), (2, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (2, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (2, 2), (3, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 2), (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (4, 2))
+  Posiciones: [('At', 'patient_0', (4, 2)), ('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (4, 2))
+  Posiciones: [('At', 'robot', (4, 2)), ('At', 'supplies_0', (4, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (4, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 30s
+
+============================================================
+PUNTO 4 - A* - Layout simple/warehouseRescue - Heurística nullHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h nullHeuristic -l warehouseRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   warehouseRescue  (15×12)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(3, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 10)), ('At', 'supplies_0', (7, 7))]
+  Planificador: aStarPlanner
+  Heurística: nullHeuristic
+
+  Tiempo de planificación: 15.466s
+  Estados expandidos: 11476
+  Longitud del plan: 31 acciones
+
+  Plan:
+     1. Move(robot, (1, 10), (2, 10))
+     2. Move(robot, (2, 10), (3, 10))
+     3. Move(robot, (3, 10), (4, 10))
+     4. Move(robot, (4, 10), (5, 10))
+     5. Move(robot, (5, 10), (6, 10))
+     6. Move(robot, (6, 10), (7, 10))
+     7. Move(robot, (7, 10), (7, 9))
+     8. Move(robot, (7, 9), (7, 8))
+     9. Move(robot, (7, 8), (7, 7))
+    10. PickUp(robot, supplies_0, (7, 7))
+    11. Move(robot, (7, 7), (7, 8))
+    12. Move(robot, (7, 8), (7, 9))
+    13. Move(robot, (7, 9), (7, 10))
+    14. Move(robot, (7, 10), (6, 10))
+    15. Move(robot, (6, 10), (5, 10))
+    16. Move(robot, (5, 10), (4, 10))
+    17. Move(robot, (4, 10), (3, 10))
+    18. Move(robot, (3, 10), (3, 9))
+    19. Move(robot, (3, 9), (3, 8))
+    20. Move(robot, (3, 8), (3, 7))
+    21. Move(robot, (3, 7), (3, 6))
+    22. Move(robot, (3, 6), (3, 5))
+    23. Move(robot, (3, 5), (3, 4))
+    24. Move(robot, (3, 4), (3, 3))
+    25. Move(robot, (3, 3), (3, 2))
+    26. SetupSupplies(robot, supplies_0, (3, 2))
+    27. Move(robot, (3, 2), (3, 1))
+    28. PickUp(robot, patient_0, (3, 1))
+    29. Move(robot, (3, 1), (3, 2))
+    30. PutDown(robot, patient_0, (3, 2))
+    31. Rescue(robot, patient_0, (3, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 10), (2, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (2, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (2, 10), (3, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 10), (4, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (4, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (4, 10), (5, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (5, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (5, 10), (6, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (6, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (6, 10), (7, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 10), (7, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 9)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 9), (7, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 8)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 8), (7, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 7)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: PickUp(robot, supplies_0, (7, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 7), (7, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 8), (7, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 9))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 9), (7, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 10), (6, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (6, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 10), (5, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (5, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 10), (4, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (4, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 10), (3, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 10), (3, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 9))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 9), (3, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 8), (3, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 7), (3, 6))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 6), (3, 5))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 5), (3, 4))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 4), (3, 3))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 3), (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Move(robot, (3, 2), (3, 1))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (3, 1))
+  Posiciones: [('At', 'robot', (3, 1)), ('At', 'supplies_0', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (3, 2))
+  Posiciones: [('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (3, 2))
+  Posiciones: [('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 18s
+
+============================================================
+PUNTO 4 - A* - Layout simple/warehouseRescue - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l warehouseRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   warehouseRescue  (15×12)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(3, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 10)), ('At', 'supplies_0', (7, 7))]
+  Planificador: aStarPlanner
+  Heurística: ignorePreconditionsHeuristic
+
+  Tiempo de planificación: 29.178s
+  Estados expandidos: 10367
+  Longitud del plan: 31 acciones
+
+  Plan:
+     1. Move(robot, (1, 10), (2, 10))
+     2. Move(robot, (2, 10), (3, 10))
+     3. Move(robot, (3, 10), (4, 10))
+     4. Move(robot, (4, 10), (5, 10))
+     5. Move(robot, (5, 10), (6, 10))
+     6. Move(robot, (6, 10), (7, 10))
+     7. Move(robot, (7, 10), (7, 9))
+     8. Move(robot, (7, 9), (7, 8))
+     9. Move(robot, (7, 8), (7, 7))
+    10. PickUp(robot, supplies_0, (7, 7))
+    11. Move(robot, (7, 7), (7, 8))
+    12. Move(robot, (7, 8), (7, 9))
+    13. Move(robot, (7, 9), (7, 10))
+    14. Move(robot, (7, 10), (6, 10))
+    15. Move(robot, (6, 10), (5, 10))
+    16. Move(robot, (5, 10), (4, 10))
+    17. Move(robot, (4, 10), (3, 10))
+    18. Move(robot, (3, 10), (3, 9))
+    19. Move(robot, (3, 9), (3, 8))
+    20. Move(robot, (3, 8), (3, 7))
+    21. Move(robot, (3, 7), (3, 6))
+    22. Move(robot, (3, 6), (3, 5))
+    23. Move(robot, (3, 5), (3, 4))
+    24. Move(robot, (3, 4), (3, 3))
+    25. Move(robot, (3, 3), (3, 2))
+    26. SetupSupplies(robot, supplies_0, (3, 2))
+    27. Move(robot, (3, 2), (3, 1))
+    28. PickUp(robot, patient_0, (3, 1))
+    29. Move(robot, (3, 1), (3, 2))
+    30. PutDown(robot, patient_0, (3, 2))
+    31. Rescue(robot, patient_0, (3, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 10), (2, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (2, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (2, 10), (3, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 10), (4, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (4, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (4, 10), (5, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (5, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (5, 10), (6, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (6, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (6, 10), (7, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 10), (7, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 9)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 9), (7, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 8)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 8), (7, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 7)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: PickUp(robot, supplies_0, (7, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 7), (7, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 8), (7, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 9))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 9), (7, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (7, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 10), (6, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (6, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 10), (5, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (5, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 10), (4, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (4, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 10), (3, 10))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 10), (3, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 9))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 9), (3, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 8), (3, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 7), (3, 6))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 6), (3, 5))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 5), (3, 4))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 4), (3, 3))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 3), (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Move(robot, (3, 2), (3, 1))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (3, 1))
+  Posiciones: [('At', 'robot', (3, 1)), ('At', 'supplies_0', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (3, 2))
+  Posiciones: [('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (3, 2))
+  Posiciones: [('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 31s
+
+============================================================
+PUNTO 4 - A* - Layout simple/warehouseRescue - Heurística ignoreDeleteListsHeuristic
+Comando: python3 main.py -p SimpleRescueProblem -f aStarPlanner -h ignoreDeleteListsHeuristic -l warehouseRescue -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   warehouseRescue  (15×12)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(3, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 10)), ('At', 'supplies_0', (7, 7))]
+  Planificador: aStarPlanner
+  Heurística: ignoreDeleteListsHeuristic
+
+  Tiempo de planificación: 80.573s
+  Estados expandidos: 219
+  Longitud del plan: 47 acciones
+
+  Plan:
+     1. Move(robot, (1, 10), (1, 9))
+     2. Move(robot, (1, 9), (1, 8))
+     3. Move(robot, (1, 8), (1, 7))
+     4. Move(robot, (1, 7), (1, 6))
+     5. Move(robot, (1, 6), (1, 5))
+     6. Move(robot, (1, 5), (1, 4))
+     7. Move(robot, (1, 4), (1, 3))
+     8. Move(robot, (1, 3), (1, 2))
+     9. Move(robot, (1, 2), (1, 1))
+    10. Move(robot, (1, 1), (2, 1))
+    11. Move(robot, (2, 1), (3, 1))
+    12. PickUp(robot, patient_0, (3, 1))
+    13. Move(robot, (3, 1), (3, 2))
+    14. PutDown(robot, patient_0, (3, 2))
+    15. Move(robot, (3, 2), (3, 3))
+    16. Move(robot, (3, 3), (3, 4))
+    17. Move(robot, (3, 4), (3, 5))
+    18. Move(robot, (3, 5), (3, 6))
+    19. Move(robot, (3, 6), (3, 7))
+    20. Move(robot, (3, 7), (3, 8))
+    21. Move(robot, (3, 8), (3, 9))
+    22. Move(robot, (3, 9), (3, 10))
+    23. Move(robot, (3, 10), (4, 10))
+    24. Move(robot, (4, 10), (5, 10))
+    25. Move(robot, (5, 10), (6, 10))
+    26. Move(robot, (6, 10), (7, 10))
+    27. Move(robot, (7, 10), (7, 9))
+    28. Move(robot, (7, 9), (7, 8))
+    29. Move(robot, (7, 8), (7, 7))
+    30. PickUp(robot, supplies_0, (7, 7))
+    31. Move(robot, (7, 7), (7, 8))
+    32. Move(robot, (7, 8), (7, 9))
+    33. Move(robot, (7, 9), (7, 10))
+    34. Move(robot, (7, 10), (6, 10))
+    35. Move(robot, (6, 10), (5, 10))
+    36. Move(robot, (5, 10), (4, 10))
+    37. Move(robot, (4, 10), (3, 10))
+    38. Move(robot, (3, 10), (3, 9))
+    39. Move(robot, (3, 9), (3, 8))
+    40. Move(robot, (3, 8), (3, 7))
+    41. Move(robot, (3, 7), (3, 6))
+    42. Move(robot, (3, 6), (3, 5))
+    43. Move(robot, (3, 5), (3, 4))
+    44. Move(robot, (3, 4), (3, 3))
+    45. Move(robot, (3, 3), (3, 2))
+    46. SetupSupplies(robot, supplies_0, (3, 2))
+    47. Rescue(robot, patient_0, (3, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 10), (1, 9))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 9)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 9), (1, 8))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 8)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 8), (1, 7))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 7)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 7), (1, 6))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 6)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 6), (1, 5))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (1, 1), (2, 1))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (2, 1)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (2, 1), (3, 1))
+  Posiciones: [('At', 'patient_0', (3, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: PickUp(robot, patient_0, (3, 1))
+  Posiciones: [('At', 'robot', (3, 1)), ('At', 'supplies_0', (7, 7))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: Move(robot, (3, 1), (3, 2))
+  Posiciones: [('At', 'robot', (3, 2)), ('At', 'supplies_0', (7, 7))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+
+  Ejecutando: PutDown(robot, patient_0, (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 2), (3, 3))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 3)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 3), (3, 4))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 4)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 4), (3, 5))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 5)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 5), (3, 6))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 6)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 6), (3, 7))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 7)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 7), (3, 8))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 8)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 8), (3, 9))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 9)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 9), (3, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (3, 10), (4, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (4, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (4, 10), (5, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (5, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (5, 10), (6, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (6, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (6, 10), (7, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (7, 10)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 10), (7, 9))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (7, 9)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 9), (7, 8))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (7, 8)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: Move(robot, (7, 8), (7, 7))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (7, 7)), ('At', 'supplies_0', (7, 7))]
+
+  Ejecutando: PickUp(robot, supplies_0, (7, 7))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (7, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 7), (7, 8))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (7, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 8), (7, 9))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (7, 9))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 9), (7, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (7, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (7, 10), (6, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (6, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (6, 10), (5, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (5, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (5, 10), (4, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (4, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (4, 10), (3, 10))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 10))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 10), (3, 9))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 9))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 9), (3, 8))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 8))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 8), (3, 7))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 7))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 7), (3, 6))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 6))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 6), (3, 5))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 5))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 5), (3, 4))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 4))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 4), (3, 3))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (3, 3), (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 2))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (3, 2))
+  Posiciones: [('At', 'patient_0', (3, 2)), ('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (3, 2))
+  Posiciones: [('At', 'robot', (3, 2)), ('At', 'supplies_0', (3, 2))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (3, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 83s
+
+==================== A* EXTRA EN MULTIRESCUE ====================
+
+============================================================
+PUNTO 4 EXTRA - A* MultiRescue - Layout multi/tinyMulti - Heurística nullHeuristic
+Comando: python3 main.py -p MultiRescueProblem -f aStarPlanner -h nullHeuristic -l tinyMulti -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyMulti  (7×7)
+  Problema: MultiRescueProblem
+  Pacientes: ['patient_0', 'patient_1']
+  Suministros: ['supplies_0', 'supplies_1']
+  Puestos médicos: [(1, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+  Planificador: aStarPlanner
+  Heurística: nullHeuristic
+
+  Tiempo de planificación: 22.843s
+  Estados expandidos: 265354
+  Longitud del plan: 21 acciones
+
+  Plan:
+     1. Move(robot, (1, 5), (1, 4))
+     2. Move(robot, (1, 4), (1, 3))
+     3. PickUp(robot, supplies_0, (1, 3))
+     4. Move(robot, (1, 3), (1, 2))
+     5. SetupSupplies(robot, supplies_0, (1, 2))
+     6. Move(robot, (1, 2), (1, 1))
+     7. Move(robot, (1, 1), (2, 1))
+     8. Move(robot, (2, 1), (3, 1))
+     9. Move(robot, (3, 1), (4, 1))
+    10. PickUp(robot, patient_1, (4, 1))
+    11. Move(robot, (4, 1), (3, 1))
+    12. Move(robot, (3, 1), (2, 1))
+    13. Move(robot, (2, 1), (1, 1))
+    14. Move(robot, (1, 1), (1, 2))
+    15. PutDown(robot, patient_1, (1, 2))
+    16. Move(robot, (1, 2), (1, 1))
+    17. PickUp(robot, patient_0, (1, 1))
+    18. Move(robot, (1, 1), (1, 2))
+    19. PutDown(robot, patient_0, (1, 2))
+    20. Rescue(robot, patient_0, (1, 2))
+    21. Rescue(robot, patient_1, (1, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (2, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (2, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (2, 1), (3, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (4, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_1, (4, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (3, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (2, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (2, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (2, 1), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_1, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (1, 2)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (1, 1))
+  Posiciones: [('At', 'patient_1', (1, 2)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'patient_1', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'patient_1', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_1', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_1, (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0'), ('Rescued', 'patient_1')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 24s
+
+============================================================
+PUNTO 4 EXTRA - A* MultiRescue - Layout multi/tinyMulti - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p MultiRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l tinyMulti -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyMulti  (7×7)
+  Problema: MultiRescueProblem
+  Pacientes: ['patient_0', 'patient_1']
+  Suministros: ['supplies_0', 'supplies_1']
+  Puestos médicos: [(1, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+  Planificador: aStarPlanner
+  Heurística: ignorePreconditionsHeuristic
+
+  Tiempo de planificación: 42.238s
+  Estados expandidos: 123005
+  Longitud del plan: 21 acciones
+
+  Plan:
+     1. Move(robot, (1, 5), (1, 4))
+     2. Move(robot, (1, 4), (1, 3))
+     3. PickUp(robot, supplies_0, (1, 3))
+     4. Move(robot, (1, 3), (1, 2))
+     5. SetupSupplies(robot, supplies_0, (1, 2))
+     6. Move(robot, (1, 2), (1, 1))
+     7. PickUp(robot, patient_0, (1, 1))
+     8. Move(robot, (1, 1), (1, 2))
+     9. PutDown(robot, patient_0, (1, 2))
+    10. Rescue(robot, patient_0, (1, 2))
+    11. Move(robot, (1, 2), (1, 1))
+    12. Move(robot, (1, 1), (2, 1))
+    13. Move(robot, (2, 1), (3, 1))
+    14. Move(robot, (3, 1), (4, 1))
+    15. PickUp(robot, patient_1, (4, 1))
+    16. Move(robot, (4, 1), (3, 1))
+    17. Move(robot, (3, 1), (2, 1))
+    18. Move(robot, (2, 1), (1, 1))
+    19. Move(robot, (1, 1), (1, 2))
+    20. PutDown(robot, patient_1, (1, 2))
+    21. Rescue(robot, patient_1, (1, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (1, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (2, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (2, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (2, 1), (3, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (4, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_1, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (3, 1))
+  Posiciones: [('At', 'robot', (3, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (2, 1))
+  Posiciones: [('At', 'robot', (2, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (2, 1), (1, 1))
+  Posiciones: [('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_1, (1, 2))
+  Posiciones: [('At', 'patient_1', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_1, (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0'), ('Rescued', 'patient_1')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 43s
+
+============================================================
+PUNTO 4 EXTRA - A* MultiRescue - Layout multi/tinyMulti - Heurística ignoreDeleteListsHeuristic
+Comando: python3 main.py -p MultiRescueProblem -f aStarPlanner -h ignoreDeleteListsHeuristic -l tinyMulti -t
+============================================================
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyMulti  (7×7)
+  Problema: MultiRescueProblem
+  Pacientes: ['patient_0', 'patient_1']
+  Suministros: ['supplies_0', 'supplies_1']
+  Puestos médicos: [(1, 2)]
+============================================================
+============================================================
+Operación Fénix – Modo Texto
+============================================================
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 5)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+  Planificador: aStarPlanner
+  Heurística: ignoreDeleteListsHeuristic
+
+  Tiempo de planificación: 10.237s
+  Estados expandidos: 646
+  Longitud del plan: 21 acciones
+
+  Plan:
+     1. Move(robot, (1, 5), (1, 4))
+     2. Move(robot, (1, 4), (1, 3))
+     3. PickUp(robot, supplies_0, (1, 3))
+     4. Move(robot, (1, 3), (1, 2))
+     5. SetupSupplies(robot, supplies_0, (1, 2))
+     6. Move(robot, (1, 2), (1, 1))
+     7. PickUp(robot, patient_0, (1, 1))
+     8. Move(robot, (1, 1), (1, 2))
+     9. PutDown(robot, patient_0, (1, 2))
+    10. Rescue(robot, patient_0, (1, 2))
+    11. Move(robot, (1, 2), (1, 1))
+    12. Move(robot, (1, 1), (2, 1))
+    13. Move(robot, (2, 1), (3, 1))
+    14. Move(robot, (3, 1), (4, 1))
+    15. PickUp(robot, patient_1, (4, 1))
+    16. Move(robot, (4, 1), (3, 1))
+    17. Move(robot, (3, 1), (2, 1))
+    18. Move(robot, (2, 1), (2, 2))
+    19. Move(robot, (2, 2), (1, 2))
+    20. PutDown(robot, patient_1, (1, 2))
+    21. Rescue(robot, patient_1, (1, 2))
+
+  Ejecutando plan...
+
+  Ejecutando: Move(robot, (1, 5), (1, 4))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 4)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+
+  Ejecutando: Move(robot, (1, 4), (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_0', (1, 3)), ('At', 'supplies_1', (4, 3))]
+
+  Ejecutando: PickUp(robot, supplies_0, (1, 3))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 3)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: Move(robot, (1, 3), (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'supplies_0')]
+
+  Ejecutando: SetupSupplies(robot, supplies_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_0', (1, 1)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_0, (1, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (1, 2))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_0', (1, 2)), ('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_0, (1, 2))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 2), (1, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (1, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (1, 1), (2, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (2, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (2, 1), (3, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (3, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (4, 1))
+  Posiciones: [('At', 'patient_1', (4, 1)), ('At', 'robot', (4, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PickUp(robot, patient_1, (4, 1))
+  Posiciones: [('At', 'robot', (4, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (4, 1), (3, 1))
+  Posiciones: [('At', 'robot', (3, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (3, 1), (2, 1))
+  Posiciones: [('At', 'robot', (2, 1)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (2, 1), (2, 2))
+  Posiciones: [('At', 'robot', (2, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Move(robot, (2, 2), (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Sosteniendo: [('Holding', 'robot', 'patient_1')]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: PutDown(robot, patient_1, (1, 2))
+  Posiciones: [('At', 'patient_1', (1, 2)), ('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  Ejecutando: Rescue(robot, patient_1, (1, 2))
+  Posiciones: [('At', 'robot', (1, 2)), ('At', 'supplies_0', (1, 2)), ('At', 'supplies_1', (4, 3))]
+  Rescatados: [('Rescued', 'patient_0'), ('Rescued', 'patient_1')]
+  Suministros listos en: [('SuppliesReady', (1, 2))]
+
+  ¡Misión completada exitosamente!
+
+============================================================
+Misión completada.
+============================================================
+
+Estado del comando: 0
+Duración aproximada: 12s
+
+============================================================
+PUNTO 4 EXTRA - A* MultiRescue - Layout multi/smallMulti - Heurística nullHeuristic
+Comando: python3 main.py -p MultiRescueProblem -f aStarPlanner -h nullHeuristic -l smallMulti -t
+============================================================
+./pruebas_punto4_astar.sh: line 25: 30422 Killed: 9               python3 main.py -p MultiRescueProblem -f aStarPlanner -h nullHeuristic -l smallMulti -t
+
+Estado del comando: 137
+Duración aproximada: 1825s
+
+============================================================
+PUNTO 4 EXTRA - A* MultiRescue - Layout multi/smallMulti - Heurística ignorePreconditionsHeuristic
+Comando: python3 main.py -p MultiRescueProblem -f aStarPlanner -h ignorePreconditionsHeuristic -l smallMulti -t
+============================================================
