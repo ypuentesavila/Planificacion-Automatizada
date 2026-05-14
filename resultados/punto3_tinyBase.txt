@@ -1,0 +1,16 @@
+=== PUNTO 3: backwardSearch tinyBase ===
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyBase  (5×7)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(1, 2)]
+============================================================
+  Planificador: backwardSearch
+
+  Tiempo de planificación: 60.168s
+  Estados expandidos: 0
+  [FALLA] No se encontró un plan.

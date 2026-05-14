@@ -1,0 +1,48 @@
+=== PUNTO 2: forwardSearch tinyBase ===
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   tinyBase  (5×7)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(1, 2)]
+============================================================
+  Planificador: forwardSearch
+=== PUNTO 2: forwardSearch smallRescue ===
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   smallRescue  (10×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(5, 2)]
+============================================================
+  Planificador: forwardSearch
+=== PUNTO 2: forwardSearch openRescue ===
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   openRescue  (12×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+  Planificador: forwardSearch
+=== PUNTO 2: forwardSearch cornerRescue ===
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   cornerRescue  (8×9)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+  Planificador: forwardSearch

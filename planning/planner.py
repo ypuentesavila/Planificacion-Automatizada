@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 from collections.abc import Callable
 
 from planning.pddl import (
@@ -242,7 +241,6 @@ def backwardSearch(problem: Problem) -> list[Action]:
     #Prompt usado: ¿Puedes simplificarlo para que quede más limpio y corto sin cambiar lo que hace?
     frontier = Queue()
     frontier.push((problem.goal, []))
-
     visited = {problem.goal}
     all_actions = get_all_groundings(problem.domain, problem.objects)
 
@@ -257,23 +255,17 @@ def backwardSearch(problem: Problem) -> list[Action]:
         for action in all_actions:
             if not action.add_list & unsatisfied_goals:
                 continue
-
             new_goal = regress(goal, action)
-
             if new_goal is None:
                 continue
-
             if new_goal in visited:
                 continue
-
             if has_false_static_goal(new_goal, problem.initial_state):
                 continue
-
             visited.add(new_goal)
             frontier.push((new_goal, [action] + actions))
 
     return []
-
     #Version inicial
     # start_goal = problem.goal
     # frontier = Queue()

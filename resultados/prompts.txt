@@ -1,0 +1,19 @@
+planning/planner.py
+forwardBFS:
+"refactoriza este codigo para que sea más compacto y limpio. usa unpacking donde sea posible, y reemplaza loops simples por expresiones equivalentes. Mantén exactamente la misma lógica y tipos de retorno."
+backwardSearch:
+"¿Puedes simplificarlo para que quede más limpio y corto sin cambiar lo que hace?"
+aStarPlanner:
+"Refactoriza este A* para que use PriorityQueue de utils.py, cachee la heurística por estado, y descarte entradas obsoletas comparando g acumulada contra el mejor g visto. Mantén exactamente la misma lógica."
+
+planning/heuristics.py
+ignorePreconditionsHeuristic:
+"Refactoriza este algoritmo de greedy set cover para que use frozenset operations nativas (&, -) y un cache de groundings reutilizable entre llamadas; mantén exactamente el mismo comportamiento."
+ignoreDeleteListsHeuristic:
+"Implementa hill-climbing sobre el problema relajado ignorando del_list. En cada paso elige la acción aplicable que más fluentes nuevos del goal añada; si ninguna aporta al goal, escoge la que más fluentes nuevos genere (para habilitar futuras acciones). No reutilices la misma acción dos veces."
+
+planning/htn.py
+hierarchicalSearch:
+"Implementa BFS sobre planes jerárquicos: cada nodo es una lista mixta de HLA/Action. Expande la primera HLA encontrada generando un plan por cada refinamiento. Detén cuando el plan sea completamente primitivo y la simulación desde initial_state alcance el goal."
+build_htn_hierarchy:
+"Construye una jerarquía HTN para el dominio de rescate. Cada HLA debe tener refinamientos concretos (lista de HLA/Action). Para Navigate, calcula el camino BFS más corto entre celdas usando la adyacencia derivada del estado inicial. Para PrepareSupplies y ExtractPatient, construye secuencias que sigan la lógica de tinyBaseSearch (PickUp/SetupSupplies/PutDown/Rescue grounded). Para múltiples pacientes genera refinamientos con permutaciones del orden (cap a N <= 4)."
