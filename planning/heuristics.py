@@ -146,38 +146,19 @@ def ignoreDeleteListsHeuristic(
         return 0
 
     groundings = _get_groundings(domain, objects)
-    applied: set = set()
     count = 0
 
     while unsatisfied:
-        best_action = None
-        best_goal_gain = -1
-        best_total_gain = -1
-
+        layer_new = set()
         for action in groundings:
-            if action.name in applied:
-                continue
             if not action.precond_pos.issubset(relaxed):
                 continue
             if not action.precond_neg.isdisjoint(relaxed):
                 continue
-            new_fluents = action.add_list - relaxed
-            if not new_fluents:
-                continue
-            goal_gain = len(new_fluents & unsatisfied)
-            total_gain = len(new_fluents)
-            if goal_gain > best_goal_gain or (
-                goal_gain == best_goal_gain and total_gain > best_total_gain
-            ):
-                best_goal_gain = goal_gain
-                best_total_gain = total_gain
-                best_action = action
-
-        if best_action is None:
+            layer_new |= action.add_list - relaxed
+        if not layer_new:
             return float("inf")
-
-        applied.add(best_action.name)
-        relaxed |= best_action.add_list
+        relaxed |= layer_new
         unsatisfied = goal_set - relaxed
         count += 1
 

@@ -219,6 +219,21 @@ def has_false_static_goal(goal: State, initial_state: State) -> bool:
         for fluent in goal
     )
 
+
+def _has_impossible_goal(goal: State, initial_state: State) -> bool:
+    """Return True if goal is logically unsatisfiable."""
+    static_predicates = {"MedicalPost", "Adjacent", "Pickable"}
+    for f in goal:
+        if f[0] in static_predicates and f not in initial_state:
+            return True
+    robot_locs = [f[2] for f in goal if f[0] == "At" and f[1] == "robot"]
+    if len(robot_locs) > 1:
+        return True
+    if robot_locs and ("Free", robot_locs[0]) in goal:
+        return True
+    return False
+
+
 def backwardSearch(problem: Problem) -> list[Action]:
     """
     Backward search (regression search) from the goal.
@@ -243,12 +258,16 @@ def backwardSearch(problem: Problem) -> list[Action]:
     frontier.push((problem.goal, []))
     visited = {problem.goal}
     all_actions = get_all_groundings(problem.domain, problem.objects)
+    max_depth = 35
 
     while not frontier.isEmpty():
         goal, actions = frontier.pop()
 
         if goal.issubset(problem.initial_state):
             return actions
+
+        if len(actions) >= max_depth:
+            continue
 
         unsatisfied_goals = goal - problem.initial_state
 
@@ -260,7 +279,7 @@ def backwardSearch(problem: Problem) -> list[Action]:
                 continue
             if new_goal in visited:
                 continue
-            if has_false_static_goal(new_goal, problem.initial_state):
+            if _has_impossible_goal(new_goal, problem.initial_state):
                 continue
             visited.add(new_goal)
             frontier.push((new_goal, [action] + actions))
