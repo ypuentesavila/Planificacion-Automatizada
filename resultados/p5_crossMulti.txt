@@ -1,0 +1,55 @@
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   crossMulti  (11×12)
+  Problema: MultiRescueProblem
+  Pacientes: ['patient_0', 'patient_1']
+  Suministros: ['supplies_0', 'supplies_1']
+  Puestos médicos: [(4, 7)]
+============================================================
+  Modo: HTN (Hierarchical Task Network)
+  HLA raíz: MultiRescueMission
+
+  Tiempo de planificación: 0.000s
+  Estados expandidos: 20
+  Longitud del plan: 33 acciones
+
+  Plan:
+     1. Move(robot,(4, 10),(4, 9))
+     2. Move(robot,(4, 9),(4, 8))
+     3. Move(robot,(4, 8),(4, 7))
+     4. Move(robot,(4, 7),(4, 6))
+     5. PickUp(robot,supplies_0,(4, 6))
+     6. Move(robot,(4, 6),(4, 7))
+     7. SetupSupplies(robot,supplies_0,(4, 7))
+     8. Move(robot,(4, 7),(4, 6))
+     9. Move(robot,(4, 6),(5, 6))
+    10. Move(robot,(5, 6),(5, 5))
+    11. Move(robot,(5, 5),(5, 4))
+    12. Move(robot,(5, 4),(5, 3))
+    13. Move(robot,(5, 3),(5, 2))
+    14. Move(robot,(5, 2),(5, 1))
+    15. PickUp(robot,patient_0,(5, 1))
+    16. Move(robot,(5, 1),(5, 2))
+    17. Move(robot,(5, 2),(4, 2))
+    18. Move(robot,(4, 2),(4, 3))
+    19. Move(robot,(4, 3),(4, 4))
+    20. Move(robot,(4, 4),(4, 5))
+    21. Move(robot,(4, 5),(4, 6))
+    22. Move(robot,(4, 6),(4, 7))
+    23. PutDown(robot,patient_0,(4, 7))
+    24. Rescue(robot,patient_0,(4, 7))
+    25. Move(robot,(4, 7),(4, 6))
+    26. Move(robot,(4, 6),(4, 5))
+    27. Move(robot,(4, 5),(4, 4))
+    28. PickUp(robot,patient_1,(4, 4))
+    29. Move(robot,(4, 4),(4, 5))
+    30. Move(robot,(4, 5),(4, 6))
+    31. Move(robot,(4, 6),(4, 7))
+    32. PutDown(robot,patient_1,(4, 7))
+    33. Rescue(robot,patient_1,(4, 7))
+
+  Ejecutando plan...
+
+  ¡Misión completada exitosamente!

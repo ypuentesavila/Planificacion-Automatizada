@@ -1,0 +1,45 @@
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   smallRescue  (10×10)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(5, 2)]
+============================================================
+  Planificador: aStarPlanner
+  Heurística: ignoreDeleteLists
+
+  Tiempo de planificación: 0.344s
+  Estados expandidos: 113
+  Longitud del plan: 23 acciones
+
+  Plan:
+     1. Move(robot, (1, 8), (2, 8))
+     2. Move(robot, (2, 8), (3, 8))
+     3. Move(robot, (3, 8), (4, 8))
+     4. Move(robot, (4, 8), (5, 8))
+     5. Move(robot, (5, 8), (6, 8))
+     6. Move(robot, (6, 8), (6, 7))
+     7. Move(robot, (6, 7), (6, 6))
+     8. Move(robot, (6, 6), (5, 6))
+     9. PickUp(robot, supplies_0, (5, 6))
+    10. Move(robot, (5, 6), (6, 6))
+    11. Move(robot, (6, 6), (6, 5))
+    12. Move(robot, (6, 5), (6, 4))
+    13. Move(robot, (6, 4), (7, 4))
+    14. Move(robot, (7, 4), (7, 3))
+    15. Move(robot, (7, 3), (7, 2))
+    16. Move(robot, (7, 2), (6, 2))
+    17. Move(robot, (6, 2), (5, 2))
+    18. SetupSupplies(robot, supplies_0, (5, 2))
+    19. Move(robot, (5, 2), (5, 1))
+    20. PickUp(robot, patient_0, (5, 1))
+    21. Move(robot, (5, 1), (5, 2))
+    22. PutDown(robot, patient_0, (5, 2))
+    23. Rescue(robot, patient_0, (5, 2))
+
+  Ejecutando plan...
+
+  ¡Misión completada exitosamente!

@@ -1,0 +1,34 @@
+
+============================================================
+  Operación Fénix - ISIS-1611 Inteligencia Artificial
+============================================================
+  Layout:   htnBase  (9×8)
+  Problema: SimpleRescueProblem
+  Pacientes: ['patient_0']
+  Suministros: ['supplies_0']
+  Puestos médicos: [(4, 2)]
+============================================================
+  Modo: HTN (Hierarchical Task Network)
+  HLA raíz: FullRescueMission(supplies_0,patient_0,(4, 2))
+
+  Tiempo de planificación: 0.000s
+  Estados expandidos: 8
+  Longitud del plan: 12 acciones
+
+  Plan:
+     1. Move(robot,(1, 4),(2, 4))
+     2. Move(robot,(2, 4),(3, 4))
+     3. Move(robot,(3, 4),(4, 4))
+     4. PickUp(robot,supplies_0,(4, 4))
+     5. Move(robot,(4, 4),(4, 3))
+     6. Move(robot,(4, 3),(4, 2))
+     7. SetupSupplies(robot,supplies_0,(4, 2))
+     8. Move(robot,(4, 2),(4, 1))
+     9. PickUp(robot,patient_0,(4, 1))
+    10. Move(robot,(4, 1),(4, 2))
+    11. PutDown(robot,patient_0,(4, 2))
+    12. Rescue(robot,patient_0,(4, 2))
+
+  Ejecutando plan...
+
+  ¡Misión completada exitosamente!
